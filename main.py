@@ -18,3 +18,6 @@ if choice == "list":
 elif choice == "build":
     # TODO: Build new figure flow
     pass
+
+#if __name__ == __main__:
+ #pass
