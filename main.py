@@ -27,6 +27,9 @@ while True:
     elif choice == 'Octagon':
         print('You want to start a fight?')
         break
+    elif choice == 'Exit' or choice == 'exit':
+        print('Have a nice day!')
+        break
     else:
         print('\n')
         print('From the list, a figure select you must, my young Padawan.' , '\n')
