@@ -1,3 +1,6 @@
+import figures  # Figures module — holds the DataFrame containing figure names and their corresponding data points
+
+
 print('\n')
 print('''Welcome to the PLOT-ter!
 
@@ -9,22 +12,33 @@ print(list_of_figures, '\n')
 
 while True:
     choice = input("")
-    if choice == "Triangle":
-        print('Three corners? Not bad...')
-        break
-    elif choice == 'Square':
+    print('\n')
+    if choice == "Triangle" or choice == 'triangle':
+        print('Three corners? Bold choice... but which kind? Not as simple as you thought, huh?', '\n')
+        triangle_option = input('Isosceles Triangle (I), Equilateral Triangle (E) or Right Triangle (R)? \n')
+        if triangle_option == 'I' or triangle_option == 'Isoceles Triangle' or triangle_option == 'Isoceles':
+            print(figures.figures_df.loc['Isosceles Triangle'])
+            break
+        elif triangle_option == 'E' or triangle_option == 'Equilateral Triangle' or triangle_option == 'Equilateral':
+            print(figures.figures_df.loc['Equilateral Triangle'])
+            break
+        elif triangle_option == 'R' or triangle_option == 'Right Triangle' or triangle_option == 'Right':
+            print(figures.figures_df.loc['Right Triangle'])
+            break
+    elif choice == 'Square' or choice == 'square':
         print('Four corners? Look at ya!')
+        print(figures.figures_df.loc['Square'])
         break
-    elif choice == 'Pentagon':
+    elif choice == 'Pentagon' or choice == 'pentagon':
         print('Secretary of Defense? Roger that!')
         break
-    elif choice == 'Hexagon':
+    elif choice == 'Hexagon' or choice == 'hexagon':
         print('Honeycombs? Sweet!')
         break
-    elif choice == 'Heptagon':
+    elif choice == 'Heptagon' or choice == 'heptagon':
         print('Mathematical?')
         break
-    elif choice == 'Octagon':
+    elif choice == 'Octagon' or choice == 'octagon':
         print('You want to start a fight?')
         break
     elif choice == 'Exit' or choice == 'exit':
