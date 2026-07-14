@@ -2,25 +2,26 @@ import csv
 import pandas as pd
 
 print('\n')
-print('''Welcome to the pL-Otter!
+print('''Welcome to the PLOT-ter!
 
-Here, we can build all figures you can think of, the weirdest, most magnifique, out of the world figures.
-
-All you need to do is answer a few questions below:
+Select a figure below and we will build it for you:
 ''')
 
-choice = input("Do you want to build your own or load a list? ")
+list_of_figures = ['Triangle', 'Square', 'Pentagon', 'Hexagon', 'Heptagon', 'Octagon']
+print(list_of_figures)
 
-if choice == "list":
-    # TODO: Ask user for file type (CSV or JSON)
-    # TODO: Show user the required format for each file type
-    # TODO: Validate file matches expected format
-    # TODO: If format is wrong, ask if they want to build their own instead
-    pass
+choice = input("")
 
-elif choice == "build":
-    # TODO: Build new figure flow
-    pass
+if choice == "Triangle":
+    print('Three corners? Not bad')
+elif choice == 'Square':
+    print('Four corners? Look at ya')
+elif choice == 'Pentagon':
+    print('Secretary of Defense?')
+elif choice == 'Hexagon':
+    print('')
+elif choice == 'Heptagon':
 
-#if __name__ == __main__:
- #pass
+elif choice == 'Octagon':
+    print('You want to start a fight?')
+
