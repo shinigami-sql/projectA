@@ -9,6 +9,7 @@ Select a figure below and we will build it for you:
 
 list_of_figures = ['Triangle', 'Square', 'Pentagon', 'Hexagon', 'Heptagon', 'Octagon']
 print(list_of_figures, '\n')
+print('To leave at any time, type \'Exit\'.', '\n')
 
 while True:
     choice = input("")
@@ -31,15 +32,19 @@ while True:
         break
     elif choice == 'Pentagon' or choice == 'pentagon':
         print('Secretary of Defense? Roger that!')
+        print(figures.figures_df.loc['Pentagon'])
         break
     elif choice == 'Hexagon' or choice == 'hexagon':
         print('Honeycombs? Sweet!')
+        print(figures.figures_df.loc['Hexagon'])
         break
     elif choice == 'Heptagon' or choice == 'heptagon':
         print('Mathematical?')
+        print(figures.figures_df.loc['Heptagon'])
         break
     elif choice == 'Octagon' or choice == 'octagon':
         print('You want to start a fight?')
+        print(figures.figures_df.loc['Octagon'])
         break
     elif choice == 'Exit' or choice == 'exit':
         print('Have a nice day!')
