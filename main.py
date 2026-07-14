@@ -7,22 +7,32 @@ Select a figure below and we will build it for you:
 list_of_figures = ['Triangle', 'Square', 'Pentagon', 'Hexagon', 'Heptagon', 'Octagon']
 print(list_of_figures, '\n')
 
-choice = input("")
+while True:
+    choice = input("")
+    if choice == "Triangle":
+        print('Three corners? Not bad...')
+        break
+    elif choice == 'Square':
+        print('Four corners? Look at ya!')
+        break
+    elif choice == 'Pentagon':
+        print('Secretary of Defense? Roger that!')
+        break
+    elif choice == 'Hexagon':
+        print('Honeycombs? Sweet!')
+        break
+    elif choice == 'Heptagon':
+        print('Mathematical?')
+        break
+    elif choice == 'Octagon':
+        print('You want to start a fight?')
+        break
+    else:
+        print('\n')
+        print('From the list, a figure select you must, my young Padawan.' , '\n')
+        print(list_of_figures)
+        print('\n')
 
-if choice == "Triangle":
-    print('Three corners? Not bad...')
-elif choice == 'Square':
-    print('Four corners? Look at ya!')
-elif choice == 'Pentagon':
-    print('Secretary of Defense? Roger that!')
-elif choice == 'Hexagon':
-    print('Honeycombs? Sweet!')
-elif choice == 'Heptagon':
-    print('Mathematical?')
-elif choice == 'Octagon':
-    print('You want to start a fight?')
-else:
-    print('Match must the figure name, or error you will get my young Padawan')
 
 
 
