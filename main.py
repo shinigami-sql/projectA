@@ -1,3 +1,6 @@
+import csv
+import pandas as pd
+
 print('\n')
 print('''Welcome to the pL-Otter!
 
