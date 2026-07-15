@@ -2,9 +2,9 @@ import figures  # Figures module — holds the DataFrame containing figure names
 
 
 print('\n')
-print('''Welcome to the PLOT-ter!
+print('''Welcome to the PLOT-ter.
 
-Select a figure below and we will build it for you:
+Select a figure to retrieve its data points:
 ''')
 
 list_of_figures = ['Triangle', 'Square', 'Pentagon', 'Hexagon', 'Heptagon', 'Octagon']
