@@ -14,7 +14,7 @@ Select a figure from the list when prompted.
 
 ## What's next?
 
-Plot figures in 2D and 3D with rotation applied, using `matplotlib`. Give the user the option to import their own CSV instead of using the built-in figures, and include the ability to generate a custom number of random data points and plot them.
+Plot figures in 2D and 3D with rotation applied, give the user the option to import their own CSV instead of using the built-in figures, and include the ability to generate a custom number of random data points and plot them.
 
 ## Long term vision
 
