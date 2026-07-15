@@ -2,7 +2,7 @@ import figures  # Figures module — holds the DataFrame containing figure names
 
 
 print('\n')
-print('''Welcome to the PLOT-ter.
+print('''Welcome to ProjectA
 
 Select a figure to retrieve its data points:
 ''')
