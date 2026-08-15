@@ -1,0 +1,10 @@
+
+- Refactored figures.py: replaced CSV-based data points with numpy formula that dynamically calculates vertex angles, generates data points, and plots the figure
+- Renamed figures.py to plt_engine.py — more accurate name for what the file does
+- Removed figures_datapoints.csv from repo — no longer needed
+- Added if __name__ == '__main__' to main.py to ensure imported modules don't run unintentionally on import
+- Added figure messages as plot titles — each figure's response message is now displayed as the title of the plot
+- Updated octagon message to "You want to start a fight? Let's go McGregor!"
+- Triangle plotting is on hold — each triangle type requires different angle logic that doesn't fit the current generate_angles implementation, working on the right approach
+
+
