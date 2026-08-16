@@ -38,20 +38,24 @@ def main():
                 plt.axis('equal') 
                 plt.show() # Renders and displays the active plot in a window
                 break
+
+         # Using keyword arguments for amount_of_vertices and title_body applies to figures 
+         # that don't have hardcoded vertex_angles, 
+         # since vertex_angles is the first required parameter and passing positionally would land on the wrong parameter       
         elif choice == 'Square' or choice == 'square':
-            plot_engine.generate_angles(4, 'Four corners? Look at ya!')
+            plot_engine.generate_angles(amount_of_vertices=4, title_body='Four corners? Look at ya!')
             break
         elif choice == 'Pentagon' or choice == 'pentagon':
-            plot_engine.generate_angles(5, 'Secretary of Defense? Roger that!')
+            plot_engine.generate_angles(amount_of_vertices=5, title_body='Secretary of Defense? Roger that!')
             break
         elif choice == 'Hexagon' or choice == 'hexagon':
-            plot_engine.generate_angles(6, 'Honeycombs? Sweet!')
+            plot_engine.generate_angles(amount_of_vertices=6, title_body='Honeycombs? Sweet!')
             break
         elif choice == 'Heptagon' or choice == 'heptagon':
-            plot_engine.generate_angles(7, 'Mathematical?')
+            plot_engine.generate_angles(amount_of_vertices=7, title_body='Mathematical?')
             break
         elif choice == 'Octagon' or choice == 'octagon':
-            plot_engine.generate_angles(8, 'You want to start a fight? Let\'s go McGregor!')
+            plot_engine.generate_angles(amount_of_vertices=8, title_body='You want to start a fight? Let\'s go McGregor!')
             break
         elif choice == 'Exit' or choice == 'exit':
             print('Have a nice day!')
