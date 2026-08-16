@@ -15,6 +15,7 @@ print('To leave at any time, type \'Exit\'.', '\n')
 def main():
     while True:
         choice = input("")
+        two_or_3_dimensional = input('\n2D or 3D?')
         print('\n')
         if choice == "Triangle" or choice == 'triangle':
             print('Three corners? Bold choice... but which kind? Not as simple as you thought, huh?', '\n')
