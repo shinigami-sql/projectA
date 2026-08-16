@@ -20,13 +20,23 @@ def main():
             print('Three corners? Bold choice... but which kind? Not as simple as you thought, huh?', '\n')
             triangle_option = input('Isosceles Triangle (I), Equilateral Triangle (E) or Right Triangle (R)? \n')
             if triangle_option == 'I' or triangle_option == 'Isoceles Triangle' or triangle_option == 'Isoceles':
-        
+                vertex_angles = [90, 225, 315]
+                plot_engine.generate_angles(vertex_angles, title_body='Two equal sides, one odd one out.')
                 break
             elif triangle_option == 'E' or triangle_option == 'Equilateral Triangle' or triangle_option == 'Equilateral':
-                
+                vertex_angles = [90, 210, 330]
+                plot_engine.generate_angles(vertex_angles, title_body='All sides equal. Perfection!')
                 break
             elif triangle_option == 'R' or triangle_option == 'Right Triangle' or triangle_option == 'Right':
-                
+                x = [1, 1, 9, 1]  
+                y = [1, 9, 1, 1]
+                plt.plot(x, y)
+                plt.title('One 90° corner — the blueprint of every building.')
+
+                # plt.axis('equal) added so a circle looks like a circle and a square looks like a square. 
+                # Without plt.axis('equal' matplotlib auto-scales each axis independently and your shapes get stretched or squished.
+                plt.axis('equal') 
+                plt.show() # Renders and displays the active plot in a window
                 break
         elif choice == 'Square' or choice == 'square':
             plot_engine.generate_angles(4, 'Four corners? Look at ya!')
