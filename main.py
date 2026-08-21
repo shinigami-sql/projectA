@@ -1,9 +1,7 @@
 from matplotlib import pyplot as plt
 import plot_engine  # Plotting engine — dynamically generates polygon coordinates using numpy and plots them
 
-
-print('\n')
-print('''Welcome to ProjectA
+print('''\nWelcome to ProjectA
 
 Select a figure to retrieve its data points:
 ''')
@@ -15,18 +13,17 @@ print('To leave at any time, type \'Exit\'.', '\n')
 def main():
     while True:
         choice = input("")
-        two_or_3_dimensional = input('\n2D or 3D?')
-        print('\n')
         if choice == "Triangle" or choice == 'triangle':
-            print('Three corners? Bold choice... but which kind? Not as simple as you thought, huh?', '\n')
-            triangle_option = input('Isosceles Triangle (I), Equilateral Triangle (E) or Right Triangle (R)? \n')
+            dimension = input('\n2D or 3D? ')
+            print('\nThree corners? Bold choice... but which kind? Not as simple as you thought, huh?', '\n')
+            triangle_option = input('Isosceles Triangle (I), Equilateral Triangle (E) or Right Triangle (R)? ' )
             if triangle_option == 'I' or triangle_option == 'Isoceles Triangle' or triangle_option == 'Isoceles':
                 vertex_angles = [90, 225, 315]
-                plot_engine.generate_angles(vertex_angles, title_body='Two equal sides, one odd one out.')
+                plot_engine.generate_angles(dimension, vertex_angles, title_body='Two equal sides and an odd one.')
                 break
             elif triangle_option == 'E' or triangle_option == 'Equilateral Triangle' or triangle_option == 'Equilateral':
                 vertex_angles = [90, 210, 330]
-                plot_engine.generate_angles(vertex_angles, title_body='All sides equal. Perfection!')
+                plot_engine.generate_angles(dimension, vertex_angles, title_body='All sides equal. Perfection!')
                 break
             elif triangle_option == 'R' or triangle_option == 'Right Triangle' or triangle_option == 'Right':
                 x = [1, 1, 9, 1]  
@@ -44,19 +41,24 @@ def main():
          # that don't have hardcoded vertex_angles, 
          # since vertex_angles is the first required parameter and passing positionally would land on the wrong parameter       
         elif choice == 'Square' or choice == 'square':
-            plot_engine.generate_angles(amount_of_vertices=4, title_body='Four corners? Look at ya!')
+            dimension = input('\n2D or 3D? ')
+            plot_engine.generate_angles(dimension, amount_of_vertices=4, title_body='Four corners? Look at ya!')
             break
         elif choice == 'Pentagon' or choice == 'pentagon':
-            plot_engine.generate_angles(amount_of_vertices=5, title_body='Secretary of Defense? Roger that!')
+            dimension = input('\n2D or 3D? ')
+            plot_engine.generate_angles(dimension, amount_of_vertices=5, title_body='Secretary of Defense? Roger that!')
             break
         elif choice == 'Hexagon' or choice == 'hexagon':
-            plot_engine.generate_angles(amount_of_vertices=6, title_body='Honeycombs? Sweet!')
+            dimension = input('\n2D or 3D? ')
+            plot_engine.generate_angles(dimension, amount_of_vertices=6, title_body='Honeycombs? Sweet!')
             break
         elif choice == 'Heptagon' or choice == 'heptagon':
-            plot_engine.generate_angles(amount_of_vertices=7, title_body='Mathematical?')
+            dimension = input('\n2D or 3D? ')
+            plot_engine.generate_angles(dimension, amount_of_vertices=7, title_body='Mathematical?')
             break
         elif choice == 'Octagon' or choice == 'octagon':
-            plot_engine.generate_angles(amount_of_vertices=8, title_body='You want to start a fight? Let\'s go McGregor!')
+            dimension = input('\n2D or 3D? ')
+            plot_engine.generate_angles(dimension, amount_of_vertices=8, title_body='You want to start a fight? Let\'s go McGregor!')
             break
         elif choice == 'Exit' or choice == 'exit':
             print('Have a nice day!')

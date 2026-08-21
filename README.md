@@ -9,12 +9,15 @@ The program prompts the user to select a geometric figure and returns its corres
 ```bash
 python main.py
 ```
+Select a figure from the list when prompted, then select 2D or 3D.
 
-Select a figure from the list when prompted.
+## What's new?
+Introduced 2D and 3D plotting. After selecting a figure, the user selects the preferred plotting mode.
 
 ## What's next?
 
-Plot figures in 2D and 3D with rotation applied, give the user the option to import their own CSV instead of using the built-in figures, and include the ability to generate a custom number of random data points and plot them.
+Plot figures in 2D and 3D with rotation applied and enhanced visuals, add a logging system that stores what you plotted as a memory and foundation for the future data pipeline, give the user the option to import their own CSV instead of using the built-in figures, and include the ability to generate a custom number of random data points and plot them.
+
 
 ## Long term vision
 
