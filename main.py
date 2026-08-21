@@ -1,5 +1,5 @@
 from matplotlib import pyplot as plt
-import plot_engine  # Plotting engine — dynamically generates polygon coordinates using numpy and plots them
+import plot_engine  # Plotting engine — generates polygon coordinates using numpy, plots figures in 2D and 3D with rotation
 
 print('''\nWelcome to ProjectA
 
