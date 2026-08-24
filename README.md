@@ -2,7 +2,7 @@
 
 This is an educational project to practice Python and its libraries.
 
-The program prompts the user to select a geometric figure and returns its corresponding data points. No plotting occurs yet, but the foundation is there. Data points are stored in `figures_datapoints.csv`, loaded in `figures.py` into a pandas DataFrame, and imported into `main.py` via `import figures`. 
+The program prompts the user to select a geometric figure, choose between 2D or 3D, plots it and applies rotation (3D only). Figure coordinates are generated dynamically using numpy in `plot_engine.py`, no CSV needed. `main.py` handles user input and control flow, `constants.py` stores all static message strings.
 
 ## How to run
 
@@ -12,11 +12,13 @@ python main.py
 Select a figure from the list when prompted, then select 2D or 3D.
 
 ## What's new?
-Introduced 2D and 3D plotting. After selecting a figure, the user selects the preferred plotting mode.
+Introduced 2D and 3D plotting. User selects the preferred plotting mode after choosing a figure. If 3D is selected, rotation is applied automatically.
 
 ## What's next?
 
-Plot figures in 2D and 3D with rotation applied and enhanced visuals, add a logging system that stores what you plotted as a memory and foundation for the future data pipeline, give the user the option to import their own CSV instead of using the built-in figures, and include the ability to generate a custom number of random data points and plot them.
+- Break main.py into multiple modules for better structure. 
+- Add an activity log that records every run and a JSON output file per session containing run metadata. 
+- The JSON will serve as the bronze layer of a data pipeline built with Dagster and dbt, advancing through silver and gold layers into a data model powering usage reports.
 
 
 ## Long term vision
