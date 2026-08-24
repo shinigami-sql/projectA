@@ -34,36 +34,24 @@ def generate_angles(dimension, vertex_angles=None, amount_of_vertices=None, titl
 		calculate_data_points(dimension, vertex_angles, title_body)
 
 def calculate_data_points(dimension, vertex_angles, title_body):
+	# list comprehension — for each angle: converts degrees to radians, np.cos returns a value
+	# between -1 and 1 representing horizontal direction, multiplied by radius to scale to the
+	# correct distance, then center_x is added to shift from origin (0,0) to the actual center
+	x = [center_x + radius * np.cos(np.radians(a)) for a in vertex_angles]
 
-	if dimension == '2D':
+	# same as x but np.sin returns vertical direction instead of horizontal,
+	# center_y shifts from origin to the actual center
+	y = [center_y + radius * np.sin(np.radians(a)) for a in vertex_angles]
 
-		# list comprehension — for each angle: converts degrees to radians, np.cos returns a value
-		# between -1 and 1 representing horizontal direction, multiplied by radius to scale to the
-		# correct distance, then center_x is added to shift from origin (0,0) to the actual center
-		x = [center_x + radius * np.cos(np.radians(a)) for a in vertex_angles]
-
-		# same as x but np.sin returns vertical direction instead of horizontal,
-		# center_y shifts from origin to the actual center
-		y = [center_y + radius * np.sin(np.radians(a)) for a in vertex_angles]
-
-		x.append(x[0])  # repeat first point to close the shape
-		y.append(y[0])
+	x.append(x[0])  # repeat first point to close the shape
+	y.append(y[0])
 		
-		plot_figures(dimension, x, y, title_body)
+	plot_figures(dimension, x, y, title_body)
 
-	elif dimension == '3D':
-
-		x = [center_x + radius * np.cos(np.radians(a)) for a in vertex_angles]
-		y = [center_y + radius * np.sin(np.radians(a)) for a in vertex_angles]
-
-		x.append(x[0]) 
-		y.append(y[0])
-
-		plot_figures(dimension, x, y, title_body)
 
 def plot_figures(dimension, x, y, title_body):
 
-	if dimension == '2D':
+	if dimension.lower() == '2d':
 
 		plt.plot(x, y, color='#00FF00')  # sets plot line color to green
 		plt.title(title_body)
@@ -85,7 +73,7 @@ def plot_figures(dimension, x, y, title_body):
 		# extra: it opens the window and blocks the script from moving forward until the window is closed.
 		plt.show() 
 
-	elif dimension == '3D':
+	elif dimension.lower() == '3d':
 
 		z_top = [4] * len(x)    # top face, list of 4s the same length as x, placing the shape at z=4
 		z_bottom = [0] * len(x) # bottom face, list of zeros the same length as x, placing the shape flat on z=0
