@@ -1,6 +1,16 @@
-from matplotlib import pyplot as plt
-import plot_engine  # Plotting engine — generates polygon coordinates using numpy, plots figures in 2D and 3D with rotation
+import plot_engine  # plotting engine — generates polygon coordinates using numpy, plots figures in 2D and 3D with rotation
 import constants # holds all static message strings used across main.py, keeps logic and text separate
+
+# logfile_generator sets up the activity log for the entire session
+# it sets up the connection — it tells Python where to write, 
+# what format, and what minimum level. Think of it as opening and configuring the file.
+import logfile_generator
+
+# logging module, used here to write to the activity log configured in logfile_generator
+# it provides the write functions, logging.info(), logging.warning() and logging.error(), 
+# that send entries to the file opened and configured by logfile_generator
+import logging  
+
 
 print(constants.welcome_message)
 
@@ -13,6 +23,7 @@ def main():
         # every time the loop completes its final condition without hitting break, it returns to the top
         while True:
             choice = input("")
+            logging.info('Session started')
             if choice == "Triangle" or choice == 'triangle':
 
                 dimension = get_dimension()
@@ -23,6 +34,9 @@ def main():
                     vertex_angles = [90, 225, 315]
                     plot_engine.generate_angles(dimension, vertex_angles, title_body=constants.isoceles_body_title)
 
+                    # required to write to the log file, without calling logging.info() the log file is created but nothing is written to it, configured in logfile_generator
+                    logging.info(f'Isosceles Triangle plotted in {dimension}') 
+
                     if not run_again():
                         break
 
@@ -30,6 +44,8 @@ def main():
                 elif triangle_option.lower() == 'e': 
                     vertex_angles = [90, 210, 330]
                     plot_engine.generate_angles(dimension, vertex_angles, title_body=constants.equilateral_body_title)
+                    logging.info(f'Equilateral Triangle plotted in {dimension}')
+
                     
                     if not run_again():
                         break
@@ -44,6 +60,7 @@ def main():
                     title_body = constants.right_triangle_body_title
 
                     plot_engine.plot_figures(dimension, x, y, title_body)
+                    logging.info(f'Right Triangle plotted in {dimension}')
                     
                     if not run_again():
                         break
@@ -57,6 +74,8 @@ def main():
             elif choice.lower() == 'square':
                 dimension = get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=4, title_body=constants.square_body_title)
+
+                logging.info(f'Square plotted in {dimension}')
                 
                 # run_again() returns True if user wants to continue, False if not
                 # if not False (user said no) the condition is True and we break
@@ -70,6 +89,7 @@ def main():
             elif choice.lower() == 'pentagon':
                 dimension = get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=5, title_body=constants.pentagon_body_title)
+                logging.info(f'Pentagon plotted in {dimension}')
                 
                 if not run_again():
                     break
@@ -78,6 +98,7 @@ def main():
             elif choice.lower() == 'hexagon':
                 dimension = get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=6, title_body=constants.hexagon_body_title)
+                logging.info(f'Hexagon plotted in {dimension}')
                 
                 if not run_again():
                     break
@@ -86,6 +107,8 @@ def main():
             elif choice.lower() == 'heptagon':
                 dimension = get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=7, title_body=constants.heptagon_body_title)
+                logging.info(f'Heptagon plotted in {dimension}')
+
                 
                 if not run_again():
                     break
@@ -94,6 +117,7 @@ def main():
             elif choice.lower() == 'octagon':
                 dimension = get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=8, title_body=constants.octagon_body_title)
+                logging.info(f'Octagon plotted in {dimension}')
                 
                 if not run_again():
                     break
@@ -101,32 +125,43 @@ def main():
 
             elif choice.lower() == 'exit':
                 print(constants.exit_message)
+                logging.info('User ended the session without plotting any figure')
                 break
 
             else:
                 print(constants.failed_selecting_figure_1_message)
+                logging.warning('User entered an invalid figure name') # logging.warning() logs unexpected but non-critical behavior, such as invalid user input
                 print(constants.list_of_figures, '\n')
 
     # triggered when user hits Ctrl+C mid execution
-    except KeyboardInterrupt:
+    except KeyboardInterrupt as e:
         # f-string, embeds variables directly inside the string using {}, cleaner alternative to .format()
         print(f'\n{constants.keyboard_interrupt_message}\n')
+        logging.error(f'KeyboardInterrupt: {e}') # logging.error() # logs errors, captures the exception object with 'as e' for the exact error message
 
     # triggered when an unexpected value is passed to a function, such as a string where a number is expected
-    except ValueError:
+    except ValueError as e:
         print(f'\n{constants.value_error_message}\n')
+        logging.error(f'ValueError: {e}')
 
     # catch-all for any unexpected runtime error not covered by KeyboardInterrupt or ValueError
     # covers errors from plot_engine, matplotlib, numpy, or anything else that crashes at runtime
-    except Exception:
+    except Exception as e:
         print(f'\n{constants.exception_message}\n')
+        logging.error(f'Exception: {e}')
+
+    except NameError as ee:
+        print(f'\n{constants.name_error_message}\n')
+        logging.error(f'NameError: {e}')
 
 
 # validates triangle selection, loops until I, E or R is entered
 # returns the valid option to be used in the triangle if/elif block
 def get_triangle_option():
     triangle_option = input(constants.triangle_options_message) 
+    logging.info('User prompted to select triangle type, Isosceles, Equilateral or Right')
     while triangle_option.lower() not in ['i', 'e', 'r']:
+        logging.warning('User entered invalid triangle option, prompting again')
         print(constants.correct_triangle_message)
         triangle_option = input(constants.triangle_options_message) 
     return triangle_option
@@ -138,7 +173,9 @@ def get_triangle_option():
 # when input matches, condition becomes False and loop exits, returning the valid dimension
 def get_dimension():
     dimension = input('\n2D or 3D? ')
+    logging.info('User prompted to select dimension, 2D or 3D')
     while dimension.lower() not in ['2d', '3d']:
+        logging.warning('User entered invalid dimension, prompting again')
         print(constants.dimension_failed_retry_message)
         dimension = input('\n2D or 3D? ')
     return dimension
@@ -150,15 +187,18 @@ def get_dimension():
 # used with 'if not run_again()' to decide whether to break the loop or continue
 def run_again():
     answer = input(constants.retry_message)
+    logging.info('User prompted to plot another figure')
     while answer.lower() not in ['y', 'n']:
         print('Y/N only')
         answer = input(constants.retry_message)
 
     if answer.lower() == 'y':
         print(f'\n{constants.list_of_figures}\n')
+        logging.info('User chose to plot another figure')
         return True
     else:
         print(f'\n{constants.no_try_again_message}\n')
+        logging.info('User decided not to plot another figure and ended the session')
         return False
 
 
