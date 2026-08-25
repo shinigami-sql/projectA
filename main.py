@@ -14,8 +14,8 @@ import logging
 
 print(constants.welcome_message)
 
-print(constants.list_of_figures, '\n')
-print(constants.exit_instructions_message, '\n')
+print(constants.list_of_figures)
+print(f'\n{constants.exit_instructions_message}\n')
 
 def main():
     try: 
@@ -32,7 +32,7 @@ def main():
 
                 if triangle_option.lower() == 'i':
                     vertex_angles = [90, 225, 315]
-                    plot_engine.generate_angles(dimension, vertex_angles, title_body=constants.isoceles_body_title)
+                    plot_engine.generate_angles(dimension, vertex_angles)
 
                     # required to write to the log file, without calling logging.info() the log file is created but nothing is written to it, configured in logfile_generator
                     logging.info(f'Isosceles Triangle plotted in {dimension}') 
@@ -43,7 +43,7 @@ def main():
     
                 elif triangle_option.lower() == 'e': 
                     vertex_angles = [90, 210, 330]
-                    plot_engine.generate_angles(dimension, vertex_angles, title_body=constants.equilateral_body_title)
+                    plot_engine.generate_angles(dimension, vertex_angles)
                     logging.info(f'Equilateral Triangle plotted in {dimension}')
 
                     
@@ -57,9 +57,8 @@ def main():
                 elif triangle_option.lower() == 'r':
                     x = [1, 1, 9, 1]  
                     y = [1, 9, 1, 1]
-                    title_body = constants.right_triangle_body_title
 
-                    plot_engine.plot_figures(dimension, x, y, title_body)
+                    plot_engine.plot_figures(dimension, x, y)
                     logging.info(f'Right Triangle plotted in {dimension}')
                     
                     if not run_again():
@@ -68,12 +67,12 @@ def main():
 
 
 
-             # Using keyword arguments for amount_of_vertices and title_body applies to figures 
-             # that don't have hardcoded vertex_angles, 
-             # since vertex_angles is the first required parameter and passing positionally would land on the wrong parameter       
+             # using keyword argument for amount_of_vertices applies to figures that don't have hardcoded vertex_angles
+             # since dimension is the only required parameter, 
+             # passing amount_of_vertices positionally would land on the wrong parameter    
             elif choice.lower() == 'square':
                 dimension = get_dimension()
-                plot_engine.generate_angles(dimension, amount_of_vertices=4, title_body=constants.square_body_title)
+                plot_engine.generate_angles(dimension, amount_of_vertices=4)
 
                 logging.info(f'Square plotted in {dimension}')
                 
@@ -88,7 +87,7 @@ def main():
 
             elif choice.lower() == 'pentagon':
                 dimension = get_dimension()
-                plot_engine.generate_angles(dimension, amount_of_vertices=5, title_body=constants.pentagon_body_title)
+                plot_engine.generate_angles(dimension, amount_of_vertices=5)
                 logging.info(f'Pentagon plotted in {dimension}')
                 
                 if not run_again():
@@ -97,7 +96,7 @@ def main():
 
             elif choice.lower() == 'hexagon':
                 dimension = get_dimension()
-                plot_engine.generate_angles(dimension, amount_of_vertices=6, title_body=constants.hexagon_body_title)
+                plot_engine.generate_angles(dimension, amount_of_vertices=6)
                 logging.info(f'Hexagon plotted in {dimension}')
                 
                 if not run_again():
@@ -106,7 +105,7 @@ def main():
 
             elif choice.lower() == 'heptagon':
                 dimension = get_dimension()
-                plot_engine.generate_angles(dimension, amount_of_vertices=7, title_body=constants.heptagon_body_title)
+                plot_engine.generate_angles(dimension, amount_of_vertices=7)
                 logging.info(f'Heptagon plotted in {dimension}')
 
                 
@@ -116,7 +115,7 @@ def main():
 
             elif choice.lower() == 'octagon':
                 dimension = get_dimension()
-                plot_engine.generate_angles(dimension, amount_of_vertices=8, title_body=constants.octagon_body_title)
+                plot_engine.generate_angles(dimension, amount_of_vertices=8)
                 logging.info(f'Octagon plotted in {dimension}')
                 
                 if not run_again():
@@ -124,7 +123,7 @@ def main():
               
 
             elif choice.lower() == 'exit':
-                print(constants.exit_message)
+                print(f'\n{constants.exit_message}\n')
                 logging.info('User ended the session without plotting any figure')
                 break
 
@@ -162,7 +161,7 @@ def get_triangle_option():
     logging.info('User prompted to select triangle type, Isosceles, Equilateral or Right')
     while triangle_option.lower() not in ['i', 'e', 'r']:
         logging.warning('User entered invalid triangle option, prompting again')
-        print(constants.correct_triangle_message)
+        print(f'\n{constants.select_correct_triangle_message}\n')
         triangle_option = input(constants.triangle_options_message) 
     return triangle_option
 
@@ -176,7 +175,7 @@ def get_dimension():
     logging.info('User prompted to select dimension, 2D or 3D')
     while dimension.lower() not in ['2d', '3d']:
         logging.warning('User entered invalid dimension, prompting again')
-        print(constants.dimension_failed_retry_message)
+        print(f'\n{constants.dimension_failed_retry_message}')
         dimension = input('\n2D or 3D? ')
     return dimension
 

@@ -7,13 +7,13 @@ center_x, center_y = 5, 5 # center point of the shape on the plot
 radius = 5 # distance from center to each vertex, controls size
 
 # generates the angle position of each corner of a polygon on a circle, starting from the top
-# dimension is required and goes first, vertex_angles, amount_of_vertices and title_body are optional, defaults to None
+# dimension is required and goes first, vertex_angles and amount_of_vertices are optional, defaults to None
 # required parameters must come before optional ones, Python assigns positional arguments left to right
-def generate_angles(dimension, vertex_angles=None, amount_of_vertices=None, title_body=None): 
+def generate_angles(dimension, vertex_angles=None, amount_of_vertices=None): 
 	
 	if vertex_angles:
 
-		calculate_data_points(dimension, vertex_angles, title_body)
+		calculate_data_points(dimension, vertex_angles)
 
 	else: 
 
@@ -31,9 +31,9 @@ def generate_angles(dimension, vertex_angles=None, amount_of_vertices=None, titl
 			else:
 				vertex_angles.append(next_angle)
 
-		calculate_data_points(dimension, vertex_angles, title_body)
+		calculate_data_points(dimension, vertex_angles)
 
-def calculate_data_points(dimension, vertex_angles, title_body):
+def calculate_data_points(dimension, vertex_angles):
 	# list comprehension — for each angle: converts degrees to radians, np.cos returns a value
 	# between -1 and 1 representing horizontal direction, multiplied by radius to scale to the
 	# correct distance, then center_x is added to shift from origin (0,0) to the actual center
@@ -46,15 +46,14 @@ def calculate_data_points(dimension, vertex_angles, title_body):
 	x.append(x[0])  # repeat first point to close the shape
 	y.append(y[0])
 		
-	plot_figures(dimension, x, y, title_body)
+	plot_figures(dimension, x, y)
 
 
-def plot_figures(dimension, x, y, title_body):
+def plot_figures(dimension, x, y):
 
 	if dimension.lower() == '2d':
 
 		plt.plot(x, y, color='#00FF00')  # sets plot line color to green
-		plt.title(title_body)
 
 		# plt.axis('equal') added so a circle looks like a circle and a square looks like a square. 
 		# Without plt.axis('equal') matplotlib auto-scales each axis independently and your shapes get stretched or squished.
@@ -91,8 +90,7 @@ def plot_figures(dimension, x, y, title_body):
 
 		ax.plot(x, y, z_bottom, color='#00FF00') # draws bottom face on the 3D cartesian plane and sets plot line color to green
 		ax.plot(x, y, z_top, color='#00FF00') # draws the top face on the 3D cartesian plane and sets plot line color to green
-
-		ax.set_title(title_body) # In 3D ax.title is an attribute that returns a Text object, not a function. For 3D we use ax.set_title(). 
+ 
 		ax.axis('equal') 
 	
 		# 'ax.set_axis_off()' hides all axes and the cartesian grid in 3D
