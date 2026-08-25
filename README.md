@@ -11,14 +11,22 @@ python main.py
 ```
 Select a figure from the list when prompted, then select 2D or 3D.
 
+## Libraries
+- matplotlib
+- numpy
+- pandas
+- logging (built-in)
+- os (built-in)
+- datetime (built-in)
+
 ## What's new?
-Introduced 2D and 3D plotting. User selects the preferred plotting mode after choosing a figure. If 3D is selected, rotation is applied automatically.
+Introduced activity logging, capturing info, warnings and errors throughout the session.
 
 ## What's next?
 
 - Break main.py into multiple modules for better structure. 
-- Add an activity log that records every run and a JSON output file per session containing run metadata. 
-- The JSON will serve as the bronze layer of a data pipeline built with Dagster and dbt, advancing through silver and gold layers into a data model powering usage reports.
+- Add a JSON output file per session containing run metadata.
+- The JSON will serve as the bronze layer of a data pipeline, advancing through silver and gold layers into a data model powering usage reports.
 
 
 ## Long term vision
