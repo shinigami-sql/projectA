@@ -29,11 +29,13 @@ exit_message = 'Have a nice day!'
 
 failed_selecting_figure_1_message = '\nFrom the list, a figure select you must, my young Padawan.\n'
 
-keyboard_interrupt_message = 'Process terminated by user.'
+keyboard_interrupt_message = '** Process terminated by user. **'
 
-value_error_message = 'Seems like you entered an invalid value. Check your input and try again.'
+value_error_message = '** Seems like you entered an invalid value. Check your input and try again. **'
 
 exception_message = '** Something unexpected crashed the program. Check the activity log. **'
+
+name_error_message = '** Undefined name in the code. **'
 
 dimension_failed_retry_message = 'Please enter 2D or 3D.'
 
