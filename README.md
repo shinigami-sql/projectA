@@ -7,7 +7,8 @@ The program prompts the user to select a geometric figure, choose between 2D or 
 ## How to run
 
 ```bash
-python main.py
+python3 main.py  # macOS/Linux
+python main.py   # Windows
 ```
 Select a figure from the list when prompted, then select 2D or 3D.
 
