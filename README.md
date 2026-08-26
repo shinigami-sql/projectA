@@ -2,7 +2,7 @@
 
 This is an educational project to practice Python and its libraries.
 
-The program prompts the user to select a geometric figure, choose between 2D or 3D, plots it and applies rotation (3D only). Figure coordinates are generated dynamically using numpy in `plot_engine.py`, no CSV needed. `main.py` handles user input and control flow, `constants.py` stores all static message strings.
+The program prompts the user to select a geometric figure, choose between 2D or 3D, plots it and applies rotation (3D only). Figure coordinates are generated dynamically using numpy in `plot_engine.py`, no CSV needed. `main.py` handles user input and control flow, `constants.py` stores all static message strings and logfile_generator.py` configures activity logging capturing info, warnings and errors throughout the session.
 
 ## How to run
 
