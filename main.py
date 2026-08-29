@@ -13,6 +13,10 @@ import logging
 
 import session_logger # session logger, writes one JSON entry per plot to the session file
 
+# input_handler.py handles all user input validation and control flow, 
+# imported here to access get_dimension, get_triangle_option and run_again
+import input_handler
+
 logging.info(constants.session_initiation_message)
 print(constants.welcome_message)
 print(constants.list_of_figures)
@@ -30,9 +34,9 @@ def main():
             choice = input("")
             if choice == "Triangle" or choice == 'triangle':
 
-                dimension = get_dimension()
+                dimension = input_handler.get_dimension()
                 print(constants.initial_triangle_message, '\n')
-                triangle_option = get_triangle_option()
+                triangle_option = input_handler.get_triangle_option()
 
                 if triangle_option.lower() == 'i':
                     vertex_angles = [90, 225, 315]
@@ -84,7 +88,7 @@ def main():
              # since dimension is the only required parameter, 
              # passing amount_of_vertices positionally would land on the wrong parameter    
             elif choice.lower() == 'square':
-                dimension = get_dimension()
+                dimension = input_handler.get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=4)
 
                 logging.info(f'Square plotted in {dimension}')
@@ -102,7 +106,7 @@ def main():
 
 
             elif choice.lower() == 'pentagon':
-                dimension = get_dimension()
+                dimension = input_handler.get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=5)
                 logging.info(f'Pentagon plotted in {dimension}')
 
@@ -114,7 +118,7 @@ def main():
                
 
             elif choice.lower() == 'hexagon':
-                dimension = get_dimension()
+                dimension = input_handler.get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=6)
                 logging.info(f'Hexagon plotted in {dimension}')
 
@@ -126,7 +130,7 @@ def main():
           
 
             elif choice.lower() == 'heptagon':
-                dimension = get_dimension()
+                dimension = input_handler.get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=7)
                 logging.info(f'Heptagon plotted in {dimension}')
 
@@ -139,7 +143,7 @@ def main():
                
 
             elif choice.lower() == 'octagon':
-                dimension = get_dimension()
+                dimension = input_handler.get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=8)
                 logging.info(f'Octagon plotted in {dimension}')
 
@@ -181,35 +185,6 @@ def main():
         print(f'\n{constants.exception_message}\n')
         logging.error(f'Exception: {e}')
 
-    
-
-
-# validates triangle selection, loops until I, E or R is entered
-# returns the valid option to be used in the triangle if/elif block
-def get_triangle_option():
-    triangle_option = input(constants.triangle_options_message) 
-    logging.info('User prompted to select triangle type, Isosceles, Equilateral or Right')
-    while triangle_option.lower() not in ['i', 'e', 'r']:
-        logging.warning('User entered invalid triangle option, prompting again')
-        print(f'\n{constants.select_correct_triangle_message}\n')
-        triangle_option = input(constants.triangle_options_message) 
-    return triangle_option
-
-
-
-# loops until user enters a valid dimension, 2D or 3D
-# while condition is True (input not in list) keep asking
-# when input matches, condition becomes False and loop exits, returning the valid dimension
-def get_dimension():
-    dimension = input('\n2D or 3D? ')
-    logging.info('User prompted to select dimension, 2D or 3D')
-    while dimension.lower() not in ['2d', '3d']:
-        logging.warning('User entered invalid dimension, prompting again')
-        print(f'\n{constants.dimension_failed_retry_message}')
-        dimension = input('\n2D or 3D? ')
-    return dimension
-
-
 # asks the user if they want to plot another figure
 # validates input, loops until Y or N is entered
 # returns True if they say yes and prints the figure list, False if they say no and prints session ended message
@@ -236,7 +211,6 @@ def run_again():
         print(f'\n{constants.no_try_again_message}\n')
         logging.info('User decided not to plot another figure and ended the session')
         return False
-
 
 if __name__ == '__main__':
     main()
