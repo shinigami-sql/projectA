@@ -96,7 +96,8 @@ def plot_figures(dimension, x, y):
 		# 'ax.set_axis_off()' hides all axes and the cartesian grid in 3D
 		# 'ax.set_facecolor('black')' sets the inner plot area to black
 		# 'fig.patch.set_facecolor('black')' sets the outer figure window to black
-		# in 3D both set_facecolor methods are needed even with ax.set_axis_off(), unlike 2D where axis('off') with
+		# in 3D both set_facecolor methods are needed even with ax.set_axis_off(), 
+		# unlike 2D where axis('off') alone is enough to turn everything black
 		ax.set_axis_off()  
 		ax.set_facecolor('black') 
 		fig.patch.set_facecolor('black')

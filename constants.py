@@ -5,9 +5,13 @@ welcome_message = '''\nWelcome to ProjectA
 Select a figure to plot:
 '''
 
+session_initiation_message = 'Session started'
+
 exit_instructions_message = 'Type \'exit\' at any time to terminate the session.'
 
 initial_triangle_message = '\nThree corners? Bold choice... but which kind? Not as simple as you thought, huh?'
+
+plot_logged_logfile_message = 'Plot logged'
 
 exit_message = 'Session ended.'
 

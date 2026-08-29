@@ -11,19 +11,23 @@ import logfile_generator
 # that send entries to the file opened and configured by logfile_generator
 import logging  
 
+import session_logger # session logger, writes one JSON entry per plot to the session file
 
+logging.info(constants.session_initiation_message)
 print(constants.welcome_message)
-
 print(constants.list_of_figures)
 print(f'\n{constants.exit_instructions_message}\n')
 
+# plot_turn tracks how many figures have been plotted in the current session, incremented each time run_again() is called
+plot_turn = 1
+
 def main():
     try: 
+
         # while True loops indefinitely, only exits when break is hit
         # every time the loop completes its final condition without hitting break, it returns to the top
         while True:
             choice = input("")
-            logging.info('Session started')
             if choice == "Triangle" or choice == 'triangle':
 
                 dimension = get_dimension()
@@ -37,6 +41,9 @@ def main():
                     # required to write to the log file, without calling logging.info() the log file is created but nothing is written to it, configured in logfile_generator
                     logging.info(f'Isosceles Triangle plotted in {dimension}') 
 
+                    session_logger.generate_session_json(plot_turn, choice, dimension, triangle_type=triangle_option)
+                    logging.info(f'{constants.plot_logged_logfile_message}')
+
                     if not run_again():
                         break
 
@@ -45,6 +52,9 @@ def main():
                     vertex_angles = [90, 210, 330]
                     plot_engine.generate_angles(dimension, vertex_angles)
                     logging.info(f'Equilateral Triangle plotted in {dimension}')
+
+                    session_logger.generate_session_json(plot_turn, choice, dimension, triangle_type=triangle_option)
+                    logging.info(f'{constants.plot_logged_logfile_message}')
 
                     
                     if not run_again():
@@ -60,7 +70,10 @@ def main():
 
                     plot_engine.plot_figures(dimension, x, y)
                     logging.info(f'Right Triangle plotted in {dimension}')
-                    
+
+                    session_logger.generate_session_json(plot_turn, choice, dimension, triangle_type=triangle_option)
+                    logging.info(f'{constants.plot_logged_logfile_message}')
+
                     if not run_again():
                         break
                     
@@ -75,6 +88,9 @@ def main():
                 plot_engine.generate_angles(dimension, amount_of_vertices=4)
 
                 logging.info(f'Square plotted in {dimension}')
+
+                session_logger.generate_session_json(plot_turn, choice, dimension)
+                logging.info(f'{constants.plot_logged_logfile_message}')
                 
                 # run_again() returns True if user wants to continue, False if not
                 # if not False (user said no) the condition is True and we break
@@ -89,6 +105,9 @@ def main():
                 dimension = get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=5)
                 logging.info(f'Pentagon plotted in {dimension}')
+
+                session_logger.generate_session_json(plot_turn, choice, dimension)
+                logging.info(f'{constants.plot_logged_logfile_message}')
                 
                 if not run_again():
                     break
@@ -98,6 +117,9 @@ def main():
                 dimension = get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=6)
                 logging.info(f'Hexagon plotted in {dimension}')
+
+                session_logger.generate_session_json(plot_turn, choice, dimension)
+                logging.info(f'{constants.plot_logged_logfile_message}')
                 
                 if not run_again():
                     break
@@ -108,6 +130,9 @@ def main():
                 plot_engine.generate_angles(dimension, amount_of_vertices=7)
                 logging.info(f'Heptagon plotted in {dimension}')
 
+                session_logger.generate_session_json(plot_turn, choice, dimension)
+                logging.info(f'{constants.plot_logged_logfile_message}')
+
                 
                 if not run_again():
                     break
@@ -117,6 +142,9 @@ def main():
                 dimension = get_dimension()
                 plot_engine.generate_angles(dimension, amount_of_vertices=8)
                 logging.info(f'Octagon plotted in {dimension}')
+
+                session_logger.generate_session_json(plot_turn, choice, dimension)
+                logging.info(f'{constants.plot_logged_logfile_message}')
                 
                 if not run_again():
                     break
@@ -143,15 +171,17 @@ def main():
         print(f'\n{constants.value_error_message}\n')
         logging.error(f'ValueError: {e}')
 
+    except NameError as e:
+        print(f'\n{constants.name_error_message}\n')
+        logging.error(f'NameError: {e}')
+
     # catch-all for any unexpected runtime error not covered by KeyboardInterrupt or ValueError
     # covers errors from plot_engine, matplotlib, numpy, or anything else that crashes at runtime
     except Exception as e:
         print(f'\n{constants.exception_message}\n')
         logging.error(f'Exception: {e}')
 
-    except NameError as ee:
-        print(f'\n{constants.name_error_message}\n')
-        logging.error(f'NameError: {e}')
+    
 
 
 # validates triangle selection, loops until I, E or R is entered
@@ -185,6 +215,13 @@ def get_dimension():
 # returns True if they say yes and prints the figure list, False if they say no and prints session ended message
 # used with 'if not run_again()' to decide whether to break the loop or continue
 def run_again():
+
+    # global declares that plot_turn refers to the module-level variable defined outside this function
+    # without global, Python would treat plot_turn as a new local variable and throw an UnboundLocalError
+    # also, global is needed here since we're modifying the variable, if that wasn't the case we wouldn't call it
+    global plot_turn
+    plot_turn += 1
+    
     answer = input(constants.retry_message)
     logging.info('User prompted to plot another figure')
     while answer.lower() not in ['y', 'n']:

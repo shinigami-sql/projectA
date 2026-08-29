@@ -5,7 +5,7 @@ import logging
 from datetime import datetime # datetime class from the datetime library, used here to dynamically name the log file with today's date
 import os  # operating system module, provides functions to interact with the file system and OS
 
-# creates the log directory if it doesn't exist, exist_ok=True prevents error if folder already exists
+# creates the log directory if it doesn't exist and 'exist_ok=True' prevents error if folder already exists
 os.makedirs('projectA_logs', exist_ok=True)
 
 # logging.basicConfig configures the activity log for the entire session
@@ -22,8 +22,11 @@ os.makedirs('projectA_logs', exist_ok=True)
 #         %(message)s: the message passed to logging.info() or logging.error() etc.
 #         %()s syntax: % marks the start, () holds the variable name, s outputs it as a string
 
+# filename includes date and time to generate a unique file per session, 
+# preventing entries from different sessions being written to the same file
+
 logging.basicConfig(
-    filename = f'projectA_logs/{datetime.now().strftime("%Y-%m-%d")}-activity.log',
+    filename = f'projectA_logs/{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}-activity.log',
     level = logging.INFO,
     format = '%(asctime)s - %(levelname)s - %(message)s'
 
