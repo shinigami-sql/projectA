@@ -1,0 +1,18 @@
+BRANCH3 COMMIT
+
+
+Added session_logger.py, generates a JSON file per session and appends one entry per plot
+
+Added os.makedirs to session_logger.py to create the sessions directory if it does not exist
+
+Created generate_session_json function in session_logger.py, takes turn, figure, dimension ,and triangle type as arguments, builds the entry dictionary and writes it to the JSON file
+
+Updated comments across main.py, plot_engine.py, constants.py and session_logger.py for clarity and accuracy
+
+Added plot_logged_message to constants.py for session JSON generation
+
+Added generate_session_json call after each plot in main.py, logs turn, figure and dimension to the session JSON file
+
+Updated log and session filenames to include time, ensuring a unique file is generated per session
+
+Added session initiation log entry at module level in main.py, logs when the session starts

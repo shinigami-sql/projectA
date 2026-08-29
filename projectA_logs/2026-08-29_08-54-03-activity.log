@@ -1,0 +1,19 @@
+2026-08-29 08:54:10,132 - INFO - Session started
+2026-08-29 08:54:11,692 - INFO - User prompted to select dimension, 2D or 3D
+2026-08-29 08:54:13,299 - INFO - User prompted to select triangle type, Isosceles, Equilateral or Right
+2026-08-29 08:54:14,947 - INFO - Right Triangle plotted in 3d
+2026-08-29 08:54:14,948 - INFO - Plot logged
+2026-08-29 08:55:10,496 - INFO - User prompted to plot another figure
+2026-08-29 08:55:10,496 - INFO - User chose to plot another figure
+2026-08-29 08:55:13,931 - INFO - Session started
+2026-08-29 08:55:15,528 - INFO - User prompted to select dimension, 2D or 3D
+2026-08-29 08:55:17,520 - INFO - Square plotted in 2d
+2026-08-29 08:55:17,520 - INFO - Plot logged
+2026-08-29 08:55:19,336 - INFO - User prompted to plot another figure
+2026-08-29 08:55:19,336 - INFO - User chose to plot another figure
+2026-08-29 08:55:21,349 - INFO - Session started
+2026-08-29 08:55:21,979 - INFO - User prompted to select dimension, 2D or 3D
+2026-08-29 08:55:24,087 - INFO - Octagon plotted in 3d
+2026-08-29 08:55:24,088 - INFO - Plot logged
+2026-08-29 08:55:26,295 - INFO - User prompted to plot another figure
+2026-08-29 08:55:26,295 - INFO - User decided not to plot another figure and ended the session
