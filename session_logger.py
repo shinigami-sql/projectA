@@ -38,7 +38,7 @@ def generate_session_json(turn, figure, dimension, triangle_type=None):
 	with open(session_file, 'a') as json_file:
 		json_file.write(json.dumps(entry) + '\n')
 
-
+def insert_into_db(turn, figure, dimension, triangle_type=None): 
 	# cursor.execute() sends the SQL INSERT statement to the PostgreSQL server through the open pipeline
 	# the triple quoted string allows the SQL to span multiple lines without concatenation
 	# %s are placeholders, psycopg2 replaces them in order with the values from the tuple below
