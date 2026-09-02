@@ -13,6 +13,8 @@ initial_triangle_message = '\nThree corners? Bold choice... but which kind? Not 
 
 plot_logged_logfile_message = 'Plot logged'
 
+db_insert_message = 'Plot saved to database.'
+
 exit_message = 'Session ended.'
 
 failed_selecting_figure_1_message = '\nFrom the list, a figure select you must, my young Padawan.\n'
@@ -34,6 +36,8 @@ dimension_failed_retry_message = 'Please enter 2D or 3D.'
 retry_message = '\nWould you like to plot another figure? (Y/N) '
 
 no_try_again_message = 'Session ended.'
+
+data_generation_complete_message = 'Data generation complete. {} records inserted into the database.'
 
 # lists
 

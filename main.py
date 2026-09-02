@@ -46,7 +46,9 @@ def main():
                     logging.info(f'Isosceles Triangle plotted in {dimension}') 
 
                     session_logger.generate_session_json(plot_turn, choice, dimension, triangle_type=triangle_option)
+                    session_logger.insert_into_db(plot_turn, choice, dimension, triangle_type=triangle_option)
                     logging.info(f'{constants.plot_logged_logfile_message}')
+                    logging.info(f'{constants.db_insert_message}')
 
                     if not run_again():
                         break
@@ -58,7 +60,9 @@ def main():
                     logging.info(f'Equilateral Triangle plotted in {dimension}')
 
                     session_logger.generate_session_json(plot_turn, choice, dimension, triangle_type=triangle_option)
+                    session_logger.insert_into_db(plot_turn, choice, dimension, triangle_type=triangle_option)
                     logging.info(f'{constants.plot_logged_logfile_message}')
+                    logging.info(f'{constants.db_insert_message}')
 
                     
                     if not run_again():
@@ -76,7 +80,9 @@ def main():
                     logging.info(f'Right Triangle plotted in {dimension}')
 
                     session_logger.generate_session_json(plot_turn, choice, dimension, triangle_type=triangle_option)
+                    session_logger.insert_into_db(plot_turn, choice, dimension, triangle_type=triangle_option)
                     logging.info(f'{constants.plot_logged_logfile_message}')
+                    logging.info(f'{constants.db_insert_message}')
 
                     if not run_again():
                         break
@@ -94,7 +100,9 @@ def main():
                 logging.info(f'Square plotted in {dimension}')
 
                 session_logger.generate_session_json(plot_turn, choice, dimension)
+                session_logger.insert_into_db(plot_turn, choice, dimension)
                 logging.info(f'{constants.plot_logged_logfile_message}')
+                logging.info(f'{constants.db_insert_message}')
                 
                 # run_again() returns True if user wants to continue, False if not
                 # if not False (user said no) the condition is True and we break
@@ -111,7 +119,9 @@ def main():
                 logging.info(f'Pentagon plotted in {dimension}')
 
                 session_logger.generate_session_json(plot_turn, choice, dimension)
+                session_logger.insert_into_db(plot_turn, choice, dimension)
                 logging.info(f'{constants.plot_logged_logfile_message}')
+                logging.info(f'{constants.db_insert_message}')
                 
                 if not run_again():
                     break
@@ -123,7 +133,9 @@ def main():
                 logging.info(f'Hexagon plotted in {dimension}')
 
                 session_logger.generate_session_json(plot_turn, choice, dimension)
+                session_logger.insert_into_db(plot_turn, choice, dimension)
                 logging.info(f'{constants.plot_logged_logfile_message}')
+                logging.info(f'{constants.db_insert_message}')
                 
                 if not run_again():
                     break
@@ -135,7 +147,9 @@ def main():
                 logging.info(f'Heptagon plotted in {dimension}')
 
                 session_logger.generate_session_json(plot_turn, choice, dimension)
+                session_logger.insert_into_db(plot_turn, choice, dimension)
                 logging.info(f'{constants.plot_logged_logfile_message}')
+                logging.info(f'{constants.db_insert_message}')
 
                 
                 if not run_again():
@@ -148,7 +162,9 @@ def main():
                 logging.info(f'Octagon plotted in {dimension}')
 
                 session_logger.generate_session_json(plot_turn, choice, dimension)
+                session_logger.insert_into_db(plot_turn, choice, dimension)
                 logging.info(f'{constants.plot_logged_logfile_message}')
+                logging.info(f'{constants.db_insert_message}')
                 
                 if not run_again():
                     break
