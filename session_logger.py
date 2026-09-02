@@ -1,6 +1,7 @@
 import json # built-in Python module, provides methods to convert between Python dictionaries and JSON strings
 from datetime import datetime # datetime class from the datetime library, used here to dynamically name the log file with today's date
 import os # operating system module, provides functions to interact with the file system and OS
+import db_connector # establishes the PostgreSQL connection and cursor on import, Python equivalent of psql connecting to the server
 
 # creates the json directory if it doesn't exist and 'exist_ok=True' prevents error if folder already exists
 os.makedirs('projectA_sessions', exist_ok=True)
@@ -36,4 +37,23 @@ def generate_session_json(turn, figure, dimension, triangle_type=None):
 
 	with open(session_file, 'a') as json_file:
 		json_file.write(json.dumps(entry) + '\n')
+
+
+	# cursor.execute() sends the SQL INSERT statement to the PostgreSQL server through the open pipeline
+	# the triple quoted string allows the SQL to span multiple lines without concatenation
+	# %s are placeholders, psycopg2 replaces them in order with the values from the tuple below
+	# the tuple uses the same function arguments as the JSON entry, applying the same conditional logic
+	# db_connector.db_connection.commit() confirms and saves the transaction to the database
+
+	db_connector.cursor.execute("""INSERT INTO plots (plot_turn, figure, triangle_type, dimension, rotation, date)
+		VALUES (%s, %s, %s, %s, %s, %s)
+		""", (turn, figure, triangle_type if triangle_type else None, dimension, True if dimension.lower() == '3d' else False, datetime.now()))
+
+	# execute() sends the SQL to the server and processes it in a temporary transaction
+	# commit() confirms and permanently saves it to the database
+	# without commit() the transaction is rolled back when the connection closes, like it never happened
+	db_connector.db_connection.commit()
+
+
+
 
