@@ -4,3 +4,4 @@ __pycache__/
 projectA_logs/
 projectA_sessions/
 commits/
+.env
