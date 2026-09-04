@@ -19,8 +19,12 @@ db_url = os.environ.get('DATABASE_URL')
 
 # db_connection using DATABASE_URL from .env, contains all connection details in one string
 db_connection = psycopg2.connect(db_url)
+cursor = db_connection.cursor()
 
-# old explicit connection kept for reference
+
+
+
+# OLD EXPLICIT CONNECTION KEPT FOR REFERENCE
 
 # sslmode='prefer' uses SSL if available but falls back to non-SSL if the server doesn't support it
 # suitable for mixed environments where SSL may or may not be available
@@ -33,5 +37,7 @@ db_connection = psycopg2.connect(db_url)
 	#port = '5432',
 	#sslmode = 'prefer')
 
-cursor = db_connection.cursor()
+#cursor = db_connection.cursor()
+
+
 
