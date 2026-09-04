@@ -6,7 +6,7 @@ on:
   schedule:
     # cron format: minute hour day month weekday
     # '0 14 * * *' means every day at 9AM UTC
-    - cron: '0 9 * * *'
+    - cron: '0 14 * * *'
 
 # defines the jobs to run
 jobs:
