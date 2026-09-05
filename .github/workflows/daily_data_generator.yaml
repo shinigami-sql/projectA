@@ -7,6 +7,9 @@ on:
     # cron format: minute hour day month weekday
     # '0 14 * * *' means every day at 11:40PM UTC (6:40PM EST)
     - cron: '40 23 * * *'
+  # workflow_dispatch adds a manual trigger button in the GitHub Actions tab
+  # useful for testing without waiting for the cron schedule to fire
+  workflow_dispatch: 
 
 # defines the jobs to run
 jobs:
