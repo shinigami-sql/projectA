@@ -1,7 +1,6 @@
 import json # built-in Python module, provides methods to convert between Python dictionaries and JSON strings
 from datetime import datetime # datetime class from the datetime library, used here to dynamically name the log file with today's date
 import os # operating system module, provides functions to interact with the file system and OS
-from data import db_connector # establishes the PostgreSQL connection and cursor on import, Python equivalent of psql connecting to the server
 import sys  # built-in Python module, provides access to interpreter variables and functions
 
 # creates the json directory if it doesn't exist and 'exist_ok=True' prevents error if folder already exists
@@ -21,6 +20,8 @@ root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # position 0 means Python checks projectA/ first before any other directory
 # without this, scripts in subfolders can't find modules in other folders
 sys.path.insert(0, root)
+
+from data import db_connector # establishes the PostgreSQL connection and cursor on import, Python equivalent of psql connecting to the server
 
 # session_filename is defined at module level so it is generated once on import and 
 # reused across all calls to generate_session_json, ensuring all entries from the same session go to the same file, 

@@ -5,8 +5,8 @@ name: Daily Data Generator
 on:
   schedule:
     # cron format: minute hour day month weekday
-    # '0 14 * * *' means every day at 11:30PM UTC (6:30PM EST)
-    - cron: '30 23 * * *'
+    # '0 14 * * *' means every day at 11:40PM UTC (6:40PM EST)
+    - cron: '40 23 * * *'
 
 # defines the jobs to run
 jobs:

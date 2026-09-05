@@ -1,7 +1,4 @@
-from loggers import session_logger # handles JSON and PostgreSQL logging, imported here to call generate_session_json with random data
 import random  # built-in Python module, used here to randomly select figures, dimensions and triangle types
-import constants  # holds all static message strings and lists, imported here to access list_of_figures and data_generation_complete_message
-
 import sys  # built-in Python module, provides access to interpreter variables and functions
 import os   # built-in Python module, provides functions to interact with the operating system and file system
 
@@ -19,6 +16,10 @@ root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # position 0 means Python checks projectA/ first before any other directory
 # without this, scripts in subfolders can't find modules in other folders
 sys.path.insert(0, root)
+
+from loggers import session_logger # handles JSON and PostgreSQL logging, imported here to call generate_session_json with random data
+import constants  # holds all static message strings and lists, imported here to access list_of_figures and data_generation_complete_message
+
 
 # loops 100 times generating random figure, dimension and triangle type
 # calls insert_into_db to send each entry to the PostgreSQL database
