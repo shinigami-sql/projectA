@@ -27,7 +27,7 @@ import constants  # holds all static message strings and lists, imported here to
 
 iterations = 0
 
-while iterations != 1:
+while iterations != 250:
 	turn = iterations
 	figure = random.choice(constants.list_of_figures)
 	dimension = random.choice(['2d', '3d'])
