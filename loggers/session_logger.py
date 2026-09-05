@@ -1,10 +1,26 @@
 import json # built-in Python module, provides methods to convert between Python dictionaries and JSON strings
 from datetime import datetime # datetime class from the datetime library, used here to dynamically name the log file with today's date
 import os # operating system module, provides functions to interact with the file system and OS
-import db_connector # establishes the PostgreSQL connection and cursor on import, Python equivalent of psql connecting to the server
+from data import db_connector # establishes the PostgreSQL connection and cursor on import, Python equivalent of psql connecting to the server
+import sys  # built-in Python module, provides access to interpreter variables and functions
 
 # creates the json directory if it doesn't exist and 'exist_ok=True' prevents error if folder already exists
 os.makedirs('projectA_sessions', exist_ok=True)
+
+# __file__ is a built-in Python variable automatically set to the path of this file as a string
+# os.path.abspath(__file__) takes that string and converts it into a guaranteed full absolute path
+# os.path.dirname() strips the last item in the path, calling it twice goes 2 levels up
+# first dirname: strips the filename, leaves the folder this file is in
+# second dirname: strips that folder, leaves projectA/ which is the project root
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# sys.path is Python's list of directories it searches in order when you do an import
+# it includes the current directory, venv site-packages, and system Python directories
+# sys.path.insert(0, root) adds projectA/ to position 0, the front of that list
+# insert doesn't replace anything, it shifts everything else down one position
+# position 0 means Python checks projectA/ first before any other directory
+# without this, scripts in subfolders can't find modules in other folders
+sys.path.insert(0, root)
 
 # session_filename is defined at module level so it is generated once on import and 
 # reused across all calls to generate_session_json, ensuring all entries from the same session go to the same file, 

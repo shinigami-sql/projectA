@@ -4,14 +4,14 @@ import constants # holds all static message strings used across main.py, keeps l
 # logfile_generator sets up the activity log for the entire session
 # it sets up the connection — it tells Python where to write, 
 # what format, and what minimum level. Think of it as opening and configuring the file.
-import logfile_generator
+from loggers import logfile_generator
 
 # logging module, used here to write to the activity log configured in logfile_generator
 # it provides the write functions, logging.info(), logging.warning() and logging.error(), 
 # that send entries to the file opened and configured by logfile_generator
 import logging  
 
-import session_logger # session logger, writes one JSON entry per plot to the session file
+from loggers import session_logger # session logger, writes one JSON entry per plot to the session file
 
 # input_handler.py handles all user input validation and control flow, 
 # imported here to access get_dimension, get_triangle_option and run_again

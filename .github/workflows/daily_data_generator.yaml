@@ -5,8 +5,8 @@ name: Daily Data Generator
 on:
   schedule:
     # cron format: minute hour day month weekday
-    # '0 14 * * *' means every day at 9AM UTC
-    - cron: '0 14 * * *'
+    # '0 14 * * *' means every day at 11:30PM UTC (6:30PM EST)
+    - cron: '30 23 * * *'
 
 # defines the jobs to run
 jobs:
@@ -15,11 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # checks out your repo code onto the virtual machine
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       # installs Python 3.10 on the virtual machine
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
       
