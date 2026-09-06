@@ -8,7 +8,9 @@ import os # Python library for interacting with the terminal and OS, used here t
 
 # loads the .env file into the session environment, 
 # adds the key-value pairs to the same pool as system variables like PATH and USER
-load_dotenv()  
+# override=False prevents load_dotenv from overwriting variables already in the environment,
+# allowing GitHub Actions secrets to take priority over .env values`
+load_dotenv(override=False)  
 
 # os.environ is the environment variables pool, .get('DATABASE_URL') pulls the db url from it by key name
 db_url = os.environ.get('DATABASE_URL')  
