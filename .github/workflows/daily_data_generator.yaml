@@ -5,7 +5,7 @@ name: Daily Data Generator
 on:
   schedule:
     # cron format: minute hour day month weekday
-    # '0 14 * * *' means every day at 11:40PM UTC (6:40PM EST)
+    # '40 23 * * *' means every day at 11:40PM UTC (6:40PM EST)
     - cron: '40 23 * * *'
   # workflow_dispatch adds a manual trigger button in the GitHub Actions tab
   # useful for testing without waiting for the cron schedule to fire
@@ -16,6 +16,9 @@ jobs:
   generate:
     # runs on a fresh Ubuntu virtual machine hosted by GitHub
     runs-on: ubuntu-latest
+    # injects DATABASE_URL secret as environment variabl
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}    
     steps:
       # checks out your repo code onto the virtual machine
       - uses: actions/checkout@v4
@@ -30,8 +33,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       
-      # injects DATABASE_URL secret as environment variable and runs data_generator.py
+      # runs data_generator.py
       - name: Run data generator
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: python3 data/data_generator.py
