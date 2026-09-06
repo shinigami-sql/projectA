@@ -20,7 +20,9 @@ db_url = os.environ.get('DATABASE_URL')
 # cursor is the transport inside that pipeline, sends SQL commands and brings results back
 
 # db_connection using DATABASE_URL from .env, contains all connection details in one string
-db_connection = psycopg2.connect(db_url)
+# dsn= explicitly tells psycopg2 that db_url is a full connection string, 
+# prevents it from misinterpreting it as separate key-value pairs
+db_connection = psycopg2.connect(dsn=db_url)
 cursor = db_connection.cursor()
 
 
