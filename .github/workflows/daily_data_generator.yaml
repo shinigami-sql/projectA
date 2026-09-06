@@ -34,4 +34,4 @@ jobs:
       - name: Run data generator
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: python3 data_generator.py
+        run: python3 data/data_generator.py
