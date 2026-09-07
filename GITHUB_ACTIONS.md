@@ -17,4 +17,4 @@ Runs 4 times daily at 6AM, 12PM, 6PM and 11:40PM UTC. Each run generates a rando
 DATABASE_URL: Supabase session pooler connection string using IPv4, stored in GitHub repository secrets
 
 ## Manual trigger
-Go to Actions tab → ProjectA Daily Data Generator → Run workflow
+Go to Actions tab -> ProjectA Daily Data Generator -> Run workflow
