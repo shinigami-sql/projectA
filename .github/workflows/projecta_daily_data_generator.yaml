@@ -1,0 +1,44 @@
+# name of the workflow, shows up in GitHub Actions tab
+name: ProjectA Daily Data Generator
+
+# when to trigger the workflow
+on:
+  schedule:
+    # cron format: minute hour day month weekday
+    # '0 6 * * *' means every day at 6AM UTC (1AM EST)
+    - cron: '0 6 * * *'
+    # '0 12 * * *' means every day at 12PM UTC (7AM EST)
+    - cron: '0 12 * * *'
+    # '0 18 * * *' means every day at 6PM UTC (1PM EST)
+    - cron: '0 18 * * *'
+    # '40 23 * * *' means every day at 11:40PM UTC (6:40PM EST)
+    - cron: '40 23 * * *'
+  # workflow_dispatch adds a manual trigger button in the GitHub Actions tab
+  # useful for testing without waiting for the cron schedule to fire
+  workflow_dispatch: 
+
+# defines the jobs to run
+jobs:
+  generate:
+    # runs on a fresh Ubuntu virtual machine hosted by GitHub
+    runs-on: ubuntu-latest
+    # injects DATABASE_URL secret as environment variabl
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}    
+    steps:
+      # checks out your repo code onto the virtual machine
+      - uses: actions/checkout@v4
+      
+      # installs Python 3.10 on the virtual machine
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      # installs all Python packages from requirements.txt
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      
+      # runs data_generator.py
+      - name: Run data generator
+        run: python3 data/data_generator.py
