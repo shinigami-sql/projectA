@@ -62,7 +62,7 @@ def insert_into_db(turn, figure, dimension, triangle_type=None):
 	# the tuple uses the same function arguments as the JSON entry, applying the same conditional logic
 	# db_connector.db_connection.commit() confirms and saves the transaction to the database
 
-	db_connector.cursor.execute("""INSERT INTO plots (plot_turn, figure, triangle_type, dimension, rotation, date)
+	db_connector.cursor.execute("""INSERT INTO raw.plots (plot_turn, figure, triangle_type, dimension, rotation, date)
 		VALUES (%s, %s, %s, %s, %s, %s)
 		""", (turn, figure, triangle_type if triangle_type else None, dimension, True if dimension.lower() == '3d' else False, datetime.now()))
 
