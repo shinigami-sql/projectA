@@ -5,6 +5,12 @@ name: Daily Data Generator
 on:
   schedule:
     # cron format: minute hour day month weekday
+    # '0 6 * * *' means every day at 6AM UTC (1AM EST)
+    - cron: '0 6 * * *'
+    # '0 12 * * *' means every day at 12PM UTC (7AM EST)
+    - cron: '0 12 * * *'
+    # '0 18 * * *' means every day at 6PM UTC (1PM EST)
+    - cron: '0 18 * * *'
     # '40 23 * * *' means every day at 11:40PM UTC (6:40PM EST)
     - cron: '40 23 * * *'
   # workflow_dispatch adds a manual trigger button in the GitHub Actions tab

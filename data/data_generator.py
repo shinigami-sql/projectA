@@ -21,13 +21,17 @@ from loggers import session_logger # handles JSON and PostgreSQL logging, import
 import constants  # holds all static message strings and lists, imported here to access list_of_figures and data_generation_complete_message
 
 
-# loops 100 times generating random figure, dimension and triangle type
+# loops n times generating random figure, dimension and triangle type
 # calls insert_into_db to send each entry to the PostgreSQL database
 # prints completion message with total records inserted once the loop finishes
 
+# iterations_limit is randomly set between 1 and 25 per run, 
+# creates more realistic and varied data distribution across multiple daily runs
+iterations_limit = random.randint(1,25)
 iterations = 0
 
-while iterations != 250:
+
+while iterations != iterations_limit:
 	turn = iterations
 	figure = random.choice(constants.list_of_figures)
 	dimension = random.choice(['2d', '3d'])
