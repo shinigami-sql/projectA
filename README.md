@@ -40,7 +40,8 @@ python data/data_generator.py   # Windows
 - Created raw, silver and gold schemas in Supabase to support a structured data pipeline
 - Created `.env` file with `python-dotenv` to load environment variables locally, keeping credentials out of the code
 - Created `data_generator.py` to populate the database with random plot data
-- Added GitHub Actions workflow running 4 times daily that executes `data_generator.py` automatically
+- Yes — combine them:
+- Added GitHub Actions workflow running 4 times daily that executes `data_generator.py` automatically, documented in `GITHUB_ACTIONS.md`
 
 ## What's next?
 Build data models on top of the plots table using dbt, orchestrated by Dagster.
