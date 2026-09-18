@@ -21,7 +21,7 @@ root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # without this, scripts in subfolders can't find modules in other folders
 sys.path.insert(0, root)
 
-from data import db_connector # establishes the PostgreSQL connection and cursor on import, Python equivalent of psql connecting to the server
+from data_pipeline import db_connector # establishes the PostgreSQL connection and cursor on import, Python equivalent of psql connecting to the server
 
 # session_filename is defined at module level so it is generated once on import and 
 # reused across all calls to generate_session_json, ensuring all entries from the same session go to the same file, 

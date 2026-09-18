@@ -1,0 +1,8 @@
+CREATE TABLE gold.total_count_figures_created_by_period (
+total_count_created_per_day INTEGER,
+total_count_created_per_week INTEGER,
+total_count_created_per_weekday INTEGER,
+total_count_created_per_weekend INTEGER,
+total_count_created_per_week_of_year INTEGER,
+total_count_created_per_month INTEGER,
+total_count_created_per_year INTEGER);
