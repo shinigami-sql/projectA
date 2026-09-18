@@ -41,4 +41,4 @@ jobs:
       
       # runs data_generator.py
       - name: Run data generator
-        run: python3 data/data_generator.py
+        run: python3 data_pipeline/data_generator.py
