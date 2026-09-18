@@ -13,4 +13,4 @@ date::TIME as time,
 TO_CHAR(date, 'Day') as day_of_week,
 CASE WHEN TO_CHAR(date, 'D') IN ('1', '7') THEN FALSE ELSE TRUE END AS is_weekday
 FROM raw.plots
-WHERE id NOT IN (SELECT id FROM silver.plots_enriched)
+WHERE id NOT IN (SELECT id FROM silver.plots_enriched);
