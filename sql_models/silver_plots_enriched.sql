@@ -1,0 +1,1 @@
+INSERT INTO silver.plots_enriched
