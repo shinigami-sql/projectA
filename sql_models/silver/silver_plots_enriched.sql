@@ -1,4 +1,4 @@
-INSERT INTO silver.plots_enriched (plot_turn, figure_title, is_triangle, triangle_type_title, dimension_title, rotation, date, time, day_of_week, is_weekday)
+INSERT INTO silver.plots_enriched (plot_turn, figure_title, is_triangle, triangle_type_title, dimension_title, rotation, date, time, day_of_week, is_weekday, week_of_month, week_of_year, month, year)
 SELECT plot_turn as plot_turn,
 INITCAP(figure) as figure_title,
 CASE WHEN INITCAP(figure) = 'Triangle' THEN TRUE else FALSE END AS is_triangle,
@@ -11,6 +11,10 @@ rotation as rotation,
 CAST(date as DATE) as date,
 date::TIME as time,
 TO_CHAR(date, 'Day') as day_of_week,
-CASE WHEN TO_CHAR(date, 'D') IN ('1', '7') THEN FALSE ELSE TRUE END AS is_weekday
+CASE WHEN TO_CHAR(date, 'D') IN ('1', '7') THEN FALSE ELSE TRUE END AS is_weekday,
+TO_CHAR(date, 'W') as week_of_month,
+TO_CHAR(date, 'WW') as week_of_year,
+TO_CHAR(date, 'Month') as month,
+TO_CHAR(date, 'YYYY') as year
 FROM raw.plots
 WHERE id NOT IN (SELECT id FROM silver.plots_enriched);

@@ -17,7 +17,7 @@ root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # without this, scripts in subfolders can't find modules in other folders
 sys.path.insert(0, root)
 
-from loggers import session_logger # handles JSON and PostgreSQL logging, imported here to call generate_session_json with random data
+from activity_logs import session_logger # handles JSON and PostgreSQL logging, imported here to call generate_session_json with random data
 import constants  # holds all static message strings and lists, imported here to access list_of_figures and data_generation_complete_message
 
 
