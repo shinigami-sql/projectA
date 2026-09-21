@@ -5,8 +5,8 @@
 -- CAST splits timestamp into DATE and TIME components
 -- TO_CHAR(date, 'Day') extracts full day name, pads to 9 characters with trailing spaces
 -- TO_CHAR(date, 'D') returns day of week as a number, 1 for Sunday and 7 for Saturday, used to flag is_weekday
--- TO_CHAR(date, 'W') returns week number within the month (1-5)
--- TO_CHAR(date, 'WW') returns week number within the year (1-53)
+-- TO_CHAR(date, 'W')::INTEGER returns week number within the month (1-5) cast to INTEGER for correct numeric ordering
+-- TO_CHAR(date, 'WW')::INTEGER returns week number within the year (1-53) cast to INTEGER for correct numeric ordering
 -- TO_CHAR(date, 'Month') returns full month name
 -- TO_CHAR(date, 'YYYY') returns 4-digit year
 
@@ -24,8 +24,8 @@ CAST(date as DATE) as date,
 date::TIME as time,
 TO_CHAR(date, 'Day') as day_of_week,
 CASE WHEN TO_CHAR(date, 'D') IN ('1', '7') THEN FALSE ELSE TRUE END AS is_weekday,
-TO_CHAR(date, 'W') as week_of_month,
-TO_CHAR(date, 'WW') as week_of_year,
+TO_CHAR(date, 'W')::INTEGER as week_of_month,
+TO_CHAR(date, 'WW')::INTEGER as week_of_year,
 TO_CHAR(date, 'Month') as month,
 TO_CHAR(date, 'YYYY') as year
 FROM raw.plots
