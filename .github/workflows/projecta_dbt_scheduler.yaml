@@ -1,0 +1,45 @@
+# name of the workflow, shows up in Github Actions tab
+name: ProjectA dbt Scheduler
+
+# when to trigger the workflow
+on:
+  schedule:
+    # cron format: minute hour day month weekday
+    # runs 1 hour after each ProjectA Data Generator workflow
+    - cron: '0 7 * * *'
+    - cron: '0 13 * * *'
+    - cron: '0 19 * * *'
+    - cron: '40 0 * * *'
+  # workflow_dispatch adds a manual trigger button in the GitHub Actions tab
+  # useful for testing without waiting for the cron schedule to fire
+  workflow_dispatch:
+
+# defines the jobs to run
+jobs:
+  dbt_scheduler: # job name, just an identifier
+    runs-on: ubuntu-latest # spins up a fresh Ubuntu virtual machine hosted by GitHub
+    # injects DATABASE_URL secret as environment variable, available before any steps run
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - uses: actions/checkout@v4 # GitHub action at version 4 that clones the entire repository onto the VM
+
+      - name: Set up Python # installs Python 3.10, required since dbt-postgres is a Python package
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dbt # installs dbt-postgres, --no-build-isolation bypasses SSL GitHub download error
+        run: pip install dbt-postgres --no-build-isolation
+
+      - name: Install dbt dependencies # installs packages listed in packages.yml such as dbt_utils
+        run: dbt deps
+        working-directory: dbt_projecta
+
+      - name: Run dbt transformation # runs all dbt models in dependency order, silver first then gold
+        run: dbt run
+        working-directory: dbt_projecta
+
+      - name: Run dbt quality tests # runs all data quality tests defined in schema.yml
+        run: dbt test
+        working-directory: dbt_projecta
