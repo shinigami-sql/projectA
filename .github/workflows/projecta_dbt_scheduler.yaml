@@ -29,6 +29,11 @@ jobs:
         with:
           python-version: '3.10'
 
+      # mkdir -p creates the .dbt directory on the VM if it does not exist
+      # cat '>' creates the profiles.yml file and writes content to it, '>' overwrites if it already exists
+      # '<<' EOF (heredoc) keeps the file open for writing until the closing EOF is reached
+      # VMs are fresh on every run so the profiles file does not exist until this step creates it
+      # credentials are pulled from GitHub secrets, nothing sensitive is stored in the codebase
       - name: Create dbt profiles
         run: |
           mkdir -p /home/runner/.dbt
@@ -37,8 +42,8 @@ jobs:
             outputs:
               dev:
                 type: postgres
-                host: aws-0-us-east-1.pooler.supabase.com
-                user: postgres.jvxdpkwrqwweftvohzmg
+                host: ${{ secrets.DB_HOST }}
+                user: ${{ secrets.DB_USER }}
                 password: ${{ secrets.DB_PASSWORD }}
                 port: 5432
                 dbname: postgres
