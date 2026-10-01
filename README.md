@@ -48,6 +48,8 @@ python data_pipeline/data_generator.py   # Windows
 
 ## GitHub Actions
 
+Workflow files are located in `.github/workflows/`.
+
 - `projecta_daily_data_generator.yml` — runs `data_generator.py` 4 times daily, inserting 1 to 25 random plot entries into Supabase
 - `projecta_dbt_scheduler.yml` — runs `dbt run` and `dbt test` 4 times daily, one hour after each data generator run
 
