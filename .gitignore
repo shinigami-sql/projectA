@@ -5,3 +5,5 @@ projectA_logs/
 projectA_sessions/
 commits/
 .env
+logs/
+table_schema_scripts/
