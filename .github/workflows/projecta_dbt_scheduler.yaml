@@ -29,6 +29,24 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Create dbt profiles
+        run: |
+          mkdir -p /home/runner/.dbt
+          cat > /home/runner/.dbt/profiles.yml << EOF
+          projecta:
+            outputs:
+              dev:
+                type: postgres
+                host: aws-0-us-east-1.pooler.supabase.com
+                user: postgres.jvxdpkwrqwweftvohzmg
+                password: ${{ secrets.DB_PASSWORD }}
+                port: 5432
+                dbname: postgres
+                schema: public
+                threads: 1
+            target: dev
+          EOF
+
       - name: Install dbt # installs dbt-postgres, --no-build-isolation bypasses SSL GitHub download error
         run: pip install dbt-postgres==1.8.2  dbt-core==1.8.7 --no-build-isolation
 
