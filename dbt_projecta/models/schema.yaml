@@ -1,0 +1,91 @@
+# schema.yml - defines tables that dbt did not create
+# these tables are managed by external processes, in this case GitHub Actions
+# version: 2 is required by dbt, defines the schema file format version
+# sources: bucket that holds all external source definitions, only one sources: key per file
+# name: the identifier used to reference this source in dbt models using {{ source('raw', 'plots') }}
+# tables: list of tables that exist under that schema, add more tables here if new ones are added to the schema
+# for tables in a different schema, add a new entry under sources: with its own name, schema and tables
+
+version: 2
+
+sources:
+  - name: raw
+    schema: raw # actual PostgreSQL schema name in Supabase
+    tables:
+      - name: plots # raw data table populated by GitHub Actions
+
+
+# models: section defines data quality tests for dbt models
+# dbt test runs these checks against the built tables and reports any violations
+# dbt_utils is a dbt community package that extends built-in functionality with additional tests and macros
+# macros are reusable Jinja SQL functions called inside model files, compiled to SQL before execution
+# tests are SQL queries dbt generates and runs against tables to validate data quality
+# unique: checks no duplicate values exist in that column
+# not_null: checks no null values exist in that column
+# accepted_values: checks column only contains values from the specified list
+# dbt_utils.expression_is_true: checks a SQL expression evaluates to true for all rows
+# added 'arguments' under each 'accepted_values' because in dbt 1.12 the format changed. values must be nested under arguments instead of directly under accepted_values
+
+# expression_is_true is scoped to the column it is nested under, no need to add the column name in the expression
+# dbt injects the column name automatically — use {{ column_name }} to reference it
+# writing the column name directly causes dbt to prepend it again resulting in this for example: 'where not(week_of_month week_of_month >= 1 AND week_of_month'
+# Also, if you are at column level it is more practical if you use jinja {{column_name}} for referencing. If you change name of column upstream, no need to change it downstream. 
+
+
+models:
+  - name: plots_enriched # silver layer model
+    columns:
+      - name: id
+        data_tests:
+          - unique # id must be unique across all rows
+          - not_null # id must never be null
+      - name: figure_title
+        data_tests:
+          - not_null # figure_title must never be null, all plots must have a figure
+      - name: dimension_title
+        data_tests:
+          - not_null # dimension_title must never be null, all plots must have a dimension
+          - accepted_values:
+              arguments: 
+                values: ['2D', '3D']
+      - name: date
+        data_tests:
+          - not_null # date must never be null, all plots must have a date
+      - name: time
+        data_tests:
+          - not_null # time must never be null, all plots must have a time
+      - name: day_of_week
+        data_tests:
+          - not_null # day_of_week must never be null, derived from date
+          - accepted_values:
+              arguments:
+                values: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+      - name: is_weekday
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true, false]
+      - name: week_of_month
+        data_tests:
+          - not_null # week_of_month must never be null, derived from date
+          - dbt_utils.expression_is_true:
+              expression: '{{column_name}} >= 1 AND week_of_month <= 5' # {{ column_name }} used for first condition since dbt prepends column name automatically
+                                                                        # hardcoded column name used after AND since dbt does not prepend there
+      - name: week_of_year
+        data_tests:
+          - not_null # week_of_year must never be null, derived from date
+          - dbt_utils.expression_is_true:
+              expression: '{{column_name}} >= 1 AND week_of_year <= 52' # {{ column_name }} used for first condition since dbt prepends column name automatically
+                                                                        # hardcoded column name used after AND since dbt does not prepend there
+      - name: month
+        data_tests:
+          - not_null # month must never be null, derived from date
+          - accepted_values:
+              arguments:  
+                values: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      - name: year
+        data_tests:
+          - not_null # year must never be null, derived from date
+          - dbt_utils.expression_is_true:
+              expression: '{{column_name}} >= 2026'
