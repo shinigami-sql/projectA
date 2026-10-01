@@ -66,7 +66,7 @@ Both workflows require the following repository secrets set in GitHub Settings �
 
 ### dbt version note
 
-The project runs dbt 2.0 locally. GitHub Actions uses dbt-core 1.8.7 and dbt-postgres 1.8.2 due to a binary download issue with dbt 2.0 on Ubuntu. This changes the `accepted_values` test syntax — locally `arguments:` is required under `accepted_values`, on 1.8.7 it is not supported and must be removed from `schema.yml` before pushing.
+The project runs dbt 2.0 locally. GitHub Actions uses dbt-core 1.8.7 and dbt-postgres 1.8.2 due to a binary download issue with dbt 2.0 on Ubuntu. This changes the `accepted_values` test syntax — locally `arguments:` is required under `accepted_values` in `dbt_projecta/models/schema.yml`, on 1.8.7 it is not supported and must be removed before pushing.
 
 ## What's new?
 
