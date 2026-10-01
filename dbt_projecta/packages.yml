@@ -1,0 +1,9 @@
+# packages.yml - lists dbt packages to install
+# run dbt deps to install packages listed here, similar to pip install -r requirements.txt
+# dbt_utils holds macros and utilities
+# macros are SQL functions written in jinja, dropped inside models like {{ ref() }} or {{ config() }}, compiled to SQL before execution
+# utilities are tests, SQL statements that run data quality checks on tables such as expression_is_true
+
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 1.4.1

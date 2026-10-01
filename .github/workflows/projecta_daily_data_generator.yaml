@@ -19,7 +19,7 @@ on:
 
 # defines the jobs to run
 jobs:
-  generate:
+  data_generator: # job name, just an identifier
     # runs on a fresh Ubuntu virtual machine hosted by GitHub
     runs-on: ubuntu-latest
     # injects DATABASE_URL secret as environment variabl
