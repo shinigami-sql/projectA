@@ -46,7 +46,7 @@ models:
         data_tests:
           - not_null # dimension_title must never be null, all plots must have a dimension
           - accepted_values:
-              arguments: 
+              #arguments: 
                 values: ['2D', '3D']
       - name: date
         data_tests:
@@ -58,13 +58,13 @@ models:
         data_tests:
           - not_null # day_of_week must never be null, derived from date
           - accepted_values:
-              arguments:
+              #arguments:
                 values: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
       - name: is_weekday
         data_tests:
           - not_null
           - accepted_values:
-              arguments:
+              #arguments:
                 values: [true, false]
       - name: week_of_month
         data_tests:
@@ -82,7 +82,7 @@ models:
         data_tests:
           - not_null # month must never be null, derived from date
           - accepted_values:
-              arguments:  
+              #arguments:  
                 values: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
       - name: year
         data_tests:
