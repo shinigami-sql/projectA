@@ -1,8 +1,7 @@
 # projectA
 This is an educational project to practice Python and its libraries, exploring data engineering concepts by building a real pipeline from scratch.
 
-The program prompts the user to select a geometric figure and choose between 2D or 3D. Selecting 3D applies rotation automatically. Each plot is logged locally as JSON and inserted into a PostgreSQL database on Supabase. A data generator populates the database with random plot data daily via GitHub Actions. A dbt transformation layer runs on a separate GitHub Actions schedule, transforming raw data through silver and gold layers with automated data quality tests.
-
+The program offers two ways to generate data. The interactive UI prompts the user to select a geometric figure and choose between 2D or 3D, plots it and applies rotation automatically for 3D. Each plot is logged locally as JSON throughout the session, and when the session ends all plots are inserted into the raw plots table on Supabase. The other way is the data generator, which populates the database with 1 to 25 random plot entries per run via GitHub Actions running 4 times daily. A dbt transformation layer runs on a separate GitHub Actions schedule, transforming raw data through silver and gold layers with automated data quality tests.
 ## How to run
 
 Create a `.env` file in the project root with a `DATABASE_URL` variable pointing to your database — this makes the project plug and play, swap the value for local or production without changing any code.
