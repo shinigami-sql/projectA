@@ -17,7 +17,7 @@ on:
 # defines the jobs to run
 jobs:
   dbt_scheduler: # job name, just an identifier
-    runs-on: ubuntu-latest # spins up a fresh Ubuntu virtual machine hosted by GitHub
+    runs-on: ubuntu-24.04 # spins up a fresh Ubuntu virtual machine hosted by GitHub. Pinned to 24.04 because ubuntu-latest moves to Ubuntu 26 on Oct 19, 2026 and could break the dbt install
     # injects DATABASE_URL secret as environment variable, available before any steps run
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
