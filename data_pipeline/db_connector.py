@@ -1,10 +1,13 @@
-import psycopg2 # psycopg2 is the client library, the Python equivalent of psql
+# built into Python, no pip install needed — interacts with the operating system (files, folders, paths, environment variables), 
+# used here to read the User-Agent from the environment
+import os
 
 # imports load_dotenv function, reads the .env file in the project folder and 
-#loads all key-value pairs into the session environment
+# loads all key-value pairs into the session environment
 from dotenv import load_dotenv  
 
-import os # Python library for interacting with the terminal and OS, used here to access environment variables
+import psycopg2 # psycopg2 is the client library, the Python equivalent of psql
+
 
 # loads the .env file into the session environment, 
 # adds the key-value pairs to the same pool as system variables like PATH and USER
