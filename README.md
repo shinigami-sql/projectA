@@ -26,6 +26,12 @@ python3 data_pipeline/data_generator.py  # macOS/Linux
 python data_pipeline/data_generator.py   # Windows
 ```
 
+## Documentation
+
+- [`docs/DATA_DICTIONARY.md`](docs/DATA_DICTIONARY.md) — every column in the `raw.plots` table, its type, meaning and possible values
+- [`docs/GITHUB_ACTIONS.md`](docs/GITHUB_ACTIONS.md) — how the data generator workflow runs
+- [`dbt_projecta/README.md`](dbt_projecta/README.md) — the dbt layer: configuration, macros, silver and gold models, and tests
+
 ## Libraries
 
 - matplotlib
@@ -50,8 +56,8 @@ python data_pipeline/data_generator.py   # Windows
 
 Workflow files are located in `.github/workflows/`.
 
-- `projecta_daily_data_generator.yml` — runs `data_generator.py` 4 times daily, inserting 1 to 25 random plot entries into Supabase
-- `projecta_dbt_scheduler.yml` — runs `dbt run` and `dbt test` 4 times daily, one hour after each data generator run
+- `projecta_daily_data_generator.yaml` — runs `data_generator.py` 4 times daily, inserting 1 to 25 random plot entries into Supabase
+- `projecta_dbt_scheduler.yaml` — runs `dbt run` and `dbt test` 4 times daily, one hour after each data generator run
 
 ### Required secrets
 
@@ -59,10 +65,10 @@ Both workflows require the following repository secrets set in GitHub Settings �
 
 | Secret | Used in | Description |
 |--------|---------|-------------|
-| `DATABASE_URL` | `projecta_daily_data_generator.yml` | Full Supabase session pooler connection string |
-| `DB_HOST` | `projecta_dbt_scheduler.yml` | Supabase session pooler host |
-| `DB_USER` | `projecta_dbt_scheduler.yml` | Supabase database username |
-| `DB_PASSWORD` | `projecta_dbt_scheduler.yml` | Supabase database password |
+| `DATABASE_URL` | `projecta_daily_data_generator.yaml` | Full Supabase session pooler connection string |
+| `DB_HOST` | `projecta_dbt_scheduler.yaml` | Supabase session pooler host |
+| `DB_USER` | `projecta_dbt_scheduler.yaml` | Supabase database username |
+| `DB_PASSWORD` | `projecta_dbt_scheduler.yaml` | Supabase database password |
 
 ### dbt version note
 
@@ -70,6 +76,10 @@ The project runs dbt 2.0 locally. GitHub Actions uses dbt-core 1.8.7 and dbt-pos
 
 ## What's new?
 
+- Added `docs/DATA_DICTIONARY.md` documenting every column in `raw.plots`
+- Fixed `plot_turn` in the data generator to start at 1, matching the interactive UI. Rows inserted before the fix start at 0
+- Updated the `week_of_year` test to allow week 53, since ISO years can have 53 weeks (like 2026)
+- Updated `dbt_projecta/README.md` to list all 10 gold models
 - Added dbt transformation layer with silver and gold data models
 - Silver model `plots_enriched` transforms and enriches raw plot data
 - Gold models answer business questions on figure counts, dimension splits, triangle types, weekday vs weekend splits, time-based breakdowns and figure rankings per period using RANK() window function

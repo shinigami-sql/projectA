@@ -32,7 +32,8 @@ iterations = 0
 
 
 while iterations != iterations_limit:
-	turn = iterations
+	# iterations starts at 0, so +1 makes plot_turn start at 1, matching the interactive UI
+	turn = iterations + 1
 	figure = random.choice(constants.list_of_figures)
 	dimension = random.choice(['2d', '3d'])
 	triangle_type = None

@@ -76,8 +76,9 @@ models:
         data_tests:
           - not_null # week_of_year must never be null, derived from date
           - dbt_utils.expression_is_true:
-              expression: '{{column_name}} >= 1 AND week_of_year <= 52' # {{ column_name }} used for first condition since dbt prepends column name automatically
+              expression: '{{column_name}} >= 1 AND week_of_year <= 53' # {{ column_name }} used for first condition since dbt prepends column name automatically
                                                                         # hardcoded column name used after AND since dbt does not prepend there
+                                                                        # 53 because ISO years can have 53 weeks, like 2026 (Dec 28–31)
       - name: month
         data_tests:
           - not_null # month must never be null, derived from date
