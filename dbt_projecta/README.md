@@ -15,6 +15,10 @@ dbt_projecta/
 │   └── gold/
 │       ├── dimension_split.sql
 │       ├── figure_plot_split.sql
+│       ├── figure_rank_by_month.sql
+│       ├── figure_rank_by_week_of_month.sql
+│       ├── figure_rank_by_weekday.sql
+│       ├── figure_split_weekday_vs_weekend.sql
 │       ├── total_count_figures_created.sql
 │       ├── total_count_figures_created_by_period.sql
 │       ├── total_count_figures_type_created_by_period.sql
@@ -55,6 +59,10 @@ Overrides dbt's built-in `generate_schema_name` macro. By default dbt concatenat
 | `dimension_split` | What is the count and percentage split between 2D and 3D plots? |
 | `figure_plot_split` | What is the count and percentage of each figure type plotted? |
 | `triangle_type_split` | What is the count and percentage of each triangle type plotted? |
+| `figure_split_weekday_vs_weekend` | What is the count and percentage of figures plotted on weekdays vs weekends? |
+| `figure_rank_by_month` | Which figures rank highest in each month? Uses the `RANK()` window function. |
+| `figure_rank_by_weekday` | Which figures rank highest on each day of the week? Uses the `RANK()` window function. |
+| `figure_rank_by_week_of_month` | Which figures rank highest in each week of the month? Uses the `RANK()` window function. |
 
 ## Data quality tests
 
@@ -67,4 +75,4 @@ dbt deps          # install packages listed in packages.yml
 dbt run           # build all models in dependency order
 dbt test          # run all data quality tests
 dbt clean         # clear compiled SQL and run artifacts from target/
-``
+```
