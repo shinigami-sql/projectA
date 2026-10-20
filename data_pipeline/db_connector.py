@@ -9,10 +9,10 @@ from dotenv import load_dotenv
 import psycopg2 # psycopg2 is the client library, the Python equivalent of psql
 
 
-# loads the .env file into the session environment, 
-# adds the key-value pairs to the same pool as system variables like PATH and USER
-# override=False prevents load_dotenv from overwriting variables already in the environment,
-# allowing GitHub Actions secrets to take priority over .env values`
+# load_dotenv reads the .env file and injects its key-value pairs into the environment,
+# making them accessible via os.getenv() alongside system variables like PATH and USER.
+# override=False ensures existing environment variables take precedence over .env values,
+# so GitHub Actions secrets (or any pre-set env vars) are not overwritten.
 load_dotenv(override=False)  
 
 # os.environ is the environment variables pool, .get('DATABASE_URL') pulls the db url from it by key name
