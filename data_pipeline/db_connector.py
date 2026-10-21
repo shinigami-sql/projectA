@@ -1,5 +1,5 @@
-# built into Python, no pip install needed — interacts with the operating system (files, folders, paths, environment variables), 
-# used here to read the User-Agent from the environment
+# built into Python, no pip install needed — interacts with the operating system (files, folders, paths, environment variables),
+# used here to read the database URL (DATABASE_URL) from the environment
 import os
 
 # imports load_dotenv function, reads the .env file in the project folder and 
