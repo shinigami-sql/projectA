@@ -63,7 +63,7 @@ Workflow files are located in `.github/workflows/`.
 
 Both workflows require the following repository secrets set in GitHub Settings → Secrets and variables → Actions. The Supabase session pooler connection string must be used instead of the direct connection — GitHub Actions only supports IPv4 and the direct connection is IPv6 only on the free tier.
 
-For security, this project forces every connection to Supabase to be encrypted with SSL: the DATABASE_URL secret ends with `?sslmode=require`, and the dbt workflow sets `sslmode: require` in the generated profiles.yml. Supabase doesn't require it, but with it the connection fails instead of falling back to unencrypted. Locally the project runs against a PostgreSQL database on localhost, so the local .env doesn’t use `sslmode=require`, since the data never leaves the computer and there's nothing to encrypt.
+For security, this project forces every connection to Supabase to be encrypted with SSL, the `DATABASE_URL` secret ends with `?sslmode=require`, and the dbt workflow sets `sslmode: require` in the generated `profiles.yml`. Supabase doesn't require it, but with it the connection fails instead of falling back to unencrypted. Locally the project runs against a PostgreSQL database on `localhost`, so the local `.env` doesn't use `sslmode=require`, since the data never leaves the computer and there's nothing to encrypt.
 
 | Secret | Used in | Description |
 |--------|---------|-------------|
@@ -78,7 +78,7 @@ The project runs dbt 2.0 locally. GitHub Actions uses dbt-core 1.8.7 and dbt-pos
 
 ## What's new?
 
-- Enforced sslmode=require to all Supabase connections for security, so the data generator and the dbt workflow always connect encrypted
+- Enforced sslmode=require on all Supabase connections for security, so the data generator and the dbt workflow always connect encrypted
 - Added `docs/DATA_DICTIONARY.md` documenting every column in `raw.plots`
 - Fixed `plot_turn` in the data generator to start at 1, matching the interactive UI. Rows inserted before the fix start at 0
 - Updated the `week_of_year` test to allow week 53, since ISO years can have 53 weeks (like 2026)
