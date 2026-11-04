@@ -34,7 +34,7 @@ dbt_projecta/
 - `models/silver/` → `silver` schema in Supabase
 - `models/gold/` → `gold` schema in Supabase
 
-`profiles.yml` lives at `~/.dbt/profiles.yml` and holds the Supabase database credentials.
+`profiles.yml` lives at `~/.dbt/profiles.yml` and holds the Supabase database credentials. The GitHub Actions workflow generates its own `profiles.yml` with `sslmode: require`, so dbt’s connection to Supabase is always encrypted with SSL.
 
 ## Macros
 

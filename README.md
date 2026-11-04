@@ -63,7 +63,7 @@ Workflow files are located in `.github/workflows/`.
 
 Both workflows require the following repository secrets set in GitHub Settings → Secrets and variables → Actions. The Supabase session pooler connection string must be used instead of the direct connection — GitHub Actions only supports IPv4 and the direct connection is IPv6 only on the free tier.
 
-For security, this project forces every connection to Supabase to be encrypted with SSL: the DATABASE_URL secret ends with `?sslmode=require`, and the dbt workflow sets `sslmode: require` in the generated profiles.yml. Supabase doesn't require it, but with it the connection fails instead of falling back to unencrypted.
+For security, this project forces every connection to Supabase to be encrypted with SSL: the DATABASE_URL secret ends with `?sslmode=require`, and the dbt workflow sets `sslmode: require` in the generated profiles.yml. Supabase doesn't require it, but with it the connection fails instead of falling back to unencrypted. Locally the project runs against a PostgreSQL database on localhost, so the local .env doesn’t use `sslmode=require`, since the data never leaves the computer and there's nothing to encrypt.
 
 | Secret | Used in | Description |
 |--------|---------|-------------|

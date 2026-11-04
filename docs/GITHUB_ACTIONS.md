@@ -14,7 +14,7 @@ Runs 4 times daily at 6AM, 12PM, 6PM and 11:40PM UTC. Each run generates a rando
 6. Runs data_generator.py, inserts 1 to 25 random plot entries into the Supabase plots table
 
 ## Required secrets
-DATABASE_URL: Supabase session pooler connection string using IPv4, stored in GitHub repository secrets
+DATABASE_URL: Supabase session pooler connection string using IPv4, stored in GitHub repository secrets. For security, it ends with `?sslmode=require`, so the connection is always encrypted with SSL.
 
 ## Manual trigger
 Go to Actions tab -> ProjectA Daily Data Generator -> Run workflow
