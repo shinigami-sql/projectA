@@ -53,7 +53,7 @@ jobs:
             target: dev
           EOF
 
-      - name: Install dbt # installs dbt-postgres, --no-build-isolation bypasses SSL GitHub download error
+      - name: Install dbt # installs dbt-postgres, --no-build-isolation builds with the runner's own tools instead of downloading fresh ones from PyPI
         run: pip install dbt-postgres==1.8.2  dbt-core==1.8.7 --no-build-isolation
 
       - name: Install dbt dependencies # installs packages listed in packages.yml such as dbt_utils
